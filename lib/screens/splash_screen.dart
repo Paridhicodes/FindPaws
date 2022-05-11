@@ -1,3 +1,4 @@
+import 'package:find_paws_engage/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -14,7 +15,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () => print("Hello"));
+    Timer(Duration(seconds: 5),
+        () => Navigator.pushNamed(context, WelcomeScreen.id));
   }
 
   @override
@@ -38,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

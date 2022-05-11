@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1099306111272",
+    "project_id": "findpaws-b4eb8",
+    "storage_bucket": "findpaws-b4eb8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099306111272:android:15aebd5a9abdff6ff6401d",
+        "android_client_info": {
+          "package_name": "com.Paridhi.find_paws_engage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099306111272-3mojegsba37tjuqmit1mp5oud2anm5bl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHMAaUh0_MnYmLZPgN0vB26wLIQCumAu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099306111272-3mojegsba37tjuqmit1mp5oud2anm5bl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
