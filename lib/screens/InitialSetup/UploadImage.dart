@@ -33,24 +33,30 @@ class _UploadImageState extends State<UploadImage> {
                   ? Container(
                       child: Column(
                         children: [
-                          const ListTile(
-                            title: Text(
-                              "Add a cute photo of your pet!",
-                              style: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.w700),
-                            ),
-                            subtitle: Text(
-                              "Choose a front facing picture, similar to a passport photo.",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: const ListTile(
+                              title: Text(
+                                "Add a cute photo of your pet!",
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.w700),
+                              ),
+                              subtitle: Text(
+                                "Choose a front facing picture, similar to a passport photo.",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           ),
+                          SizedBox(
+                            height: 30,
+                          ),
                           Image.asset(
                             'images/upload_image01.jpg',
-                            width: 300,
-                            height: 300,
+                            width: 250,
+                            height: 250,
                           ),
                           const SizedBox(
                             height: 100,
@@ -87,23 +93,26 @@ class _UploadImageState extends State<UploadImage> {
                   : Container(
                       child: Column(
                         children: [
-                          const ListTile(
-                            title: Text(
-                              "Wonderful Pic!",
-                              style: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.w700),
-                            ),
-                            subtitle: Text(
-                              "Just answer a few questions to make it easier to find your pet if they ever go missing",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: ListTile(
+                              title: Text(
+                                "Wonderful Pic!",
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.w700),
+                              ),
+                              subtitle: Text(
+                                "Just answer a few questions to make it easier to find your pet if they ever go missing",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           ),
                           Container(
                             height: 360,
-                            margin: const EdgeInsets.all(30),
+                            margin: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
                               border: Border.all(color: mainColor, width: 10),
                             ),

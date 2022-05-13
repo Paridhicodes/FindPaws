@@ -1,4 +1,3 @@
-import 'package:find_paws_engage/screens/InitialSetup/questions/question2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:find_paws_engage/constants.dart';
@@ -11,16 +10,17 @@ import 'package:find_paws_engage/components/AppBarInit.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
-class Question1 extends StatefulWidget {
-  static const String id = "question_01";
-  const Question1({Key? key}) : super(key: key);
+class Question4 extends StatefulWidget {
+  static const String id = "question_4";
+  const Question4({Key? key}) : super(key: key);
 
   @override
-  _Question1State createState() => _Question1State();
+  _Question4State createState() => _Question4State();
 }
 
-class _Question1State extends State<Question1> {
+class _Question4State extends State<Question4> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +33,7 @@ class _Question1State extends State<Question1> {
             ),
             const StepProgressIndicator(
               totalSteps: 4,
-              currentStep: 1,
+              currentStep: 4,
               selectedColor: Color(0xffdb8207),
               unselectedColor: Color(0xFFf5c489),
               size: 10,
@@ -48,46 +48,22 @@ class _Question1State extends State<Question1> {
                 alignment: Alignment.centerLeft,
                 child: Container(
                   child: const Text(
-                    "What is the name of your pet?",
+                    "Is your pet safe?",
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 56),
-              child: TextFormField(
-                style: const TextStyle(
-                  fontSize: 30,
-                ),
-                cursorHeight: 30,
-                cursorColor: Colors.grey,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: mainColor),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: mainColor, width: 1.0),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: mainColor, width: 4.0),
-                  ),
-                  labelText: 'Name',
-                  labelStyle: TextStyle(
-                    fontSize: 30,
-                    color: mainColor,
-                  ),
-                ),
-                onChanged: (value) {},
-              ),
+            const SizedBox(
+              height: 20,
             ),
             const SizedBox(
-              height: 100,
+              height: 170,
             ),
             RoundedButton(
                 buttonText: 'Next',
                 onPressed: () {
-                  Navigator.pushNamed(context, Question2.id);
+                  // Navigator.pushNamed(context, Question3.id);
                 })
           ],
         ),

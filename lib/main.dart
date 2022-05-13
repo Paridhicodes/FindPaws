@@ -1,5 +1,8 @@
 import 'package:find_paws_engage/screens/InitialSetup/UploadImage.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question1.dart';
+import 'package:find_paws_engage/screens/InitialSetup/questions/question2.dart';
+import 'package:find_paws_engage/screens/InitialSetup/questions/question3.dart';
+import 'package:find_paws_engage/screens/InitialSetup/questions/question4.dart';
 import 'package:find_paws_engage/screens/login_signup/login_screen.dart';
 import 'package:find_paws_engage/screens/login_signup/signup_screen.dart';
 import 'package:find_paws_engage/screens/splash_screen.dart';
@@ -37,6 +40,9 @@ class findPaws extends StatelessWidget {
         RegisterScreen.id: (context) => RegisterScreen(),
         UploadImage.id: (context) => UploadImage(),
         Question1.id: (context) => Question1(),
+        Question2.id: (context) => Question2(),
+        Question3.id: (context) => Question3(),
+        Question4.id: (context) => Question4(),
       },
     );
   }
