@@ -1,4 +1,5 @@
 import 'package:find_paws_engage/screens/InitialSetup/UploadImage.dart';
+import 'package:find_paws_engage/screens/InitialSetup/questions/question1.dart';
 import 'package:find_paws_engage/screens/login_signup/login_screen.dart';
 import 'package:find_paws_engage/screens/login_signup/signup_screen.dart';
 import 'package:find_paws_engage/screens/splash_screen.dart';
@@ -35,6 +36,7 @@ class findPaws extends StatelessWidget {
         LoginScreen.id: (context) => LoginScreen(),
         RegisterScreen.id: (context) => RegisterScreen(),
         UploadImage.id: (context) => UploadImage(),
+        Question1.id: (context) => Question1(),
       },
     );
   }
