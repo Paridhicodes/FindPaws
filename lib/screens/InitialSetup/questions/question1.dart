@@ -11,6 +11,7 @@ import 'package:find_paws_engage/components/AppBarInit.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import 'package:find_paws_engage/components/AlertBox.dart';
 
 class Question1 extends StatefulWidget {
   static const String id = "question_01";
@@ -22,6 +23,8 @@ class Question1 extends StatefulWidget {
 
 class _Question1State extends State<Question1> {
   @override
+  String name = "";
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -78,7 +81,9 @@ class _Question1State extends State<Question1> {
                     color: mainColor,
                   ),
                 ),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  name = value;
+                },
               ),
             ),
             const SizedBox(
@@ -87,7 +92,19 @@ class _Question1State extends State<Question1> {
             RoundedButton(
                 buttonText: 'Next',
                 onPressed: () {
-                  Navigator.pushNamed(context, Question2.id);
+                  name == ""
+                      ? showDialog<void>(
+                          context: context,
+                          barrierDismissible: false, // user must tap button!
+                          builder: (BuildContext context) {
+                            return AlertBox(
+                              titleText: 'Please enter a valid name!',
+                              bodyText:
+                                  'The name must have at least one character.',
+                            );
+                          },
+                        )
+                      : Navigator.pushNamed(context, Question2.id);
                 })
           ],
         ),

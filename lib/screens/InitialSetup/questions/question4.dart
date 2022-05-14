@@ -1,3 +1,4 @@
+import 'package:find_paws_engage/screens/InitialSetup/questions/question3.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:find_paws_engage/constants.dart';
@@ -12,6 +13,8 @@ import 'dart:async';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
+import '../../../components/AlertBox.dart';
+
 class Question4 extends StatefulWidget {
   static const String id = "question_4";
   const Question4({Key? key}) : super(key: key);
@@ -21,7 +24,9 @@ class Question4 extends StatefulWidget {
 }
 
 class _Question4State extends State<Question4> {
-  @override
+  bool pressAttention1 = false;
+  bool pressAttention2 = false;
+  bool safe = true;
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -55,15 +60,71 @@ class _Question4State extends State<Question4> {
               ),
             ),
             const SizedBox(
+              height: 60,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: MaterialButton(
+                onPressed: () {
+                  setState(() {
+                    pressAttention1 = !pressAttention1;
+                    pressAttention2 = false;
+                    safe = true;
+                  });
+                },
+                color: pressAttention1 ? Colors.green : mainColor,
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Yes, my pet is safe!",
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
+                ),
+                minWidth: 230,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: MaterialButton(
+                onPressed: () {
+                  setState(() {
+                    pressAttention2 = !pressAttention2;
+                    pressAttention1 = false;
+                    safe = false;
+                  });
+                },
+                color: pressAttention2 ? Colors.red : mainColor,
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "No, my pet is lost!",
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
+                ),
+                minWidth: 230,
+              ),
+            ),
+            const SizedBox(
               height: 20,
             ),
             const SizedBox(
-              height: 170,
+              height: 140,
             ),
             RoundedButton(
                 buttonText: 'Next',
                 onPressed: () {
-                  // Navigator.pushNamed(context, Question3.id);
+                  (!pressAttention1 && !pressAttention2)
+                      ? showDialog<void>(
+                          context: context,
+                          barrierDismissible: false, // user must tap button!
+                          builder: (BuildContext context) {
+                            return AlertBox(
+                              titleText: 'Let us know if your pet is safe.',
+                              bodyText: '',
+                            );
+                          },
+                        )
+                      : Navigator.pushNamed(context, Question4.id);
                 })
           ],
         ),

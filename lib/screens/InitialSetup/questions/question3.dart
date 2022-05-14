@@ -13,6 +13,8 @@ import 'dart:async';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
+import '../../../components/AlertBox.dart';
+
 class Question3 extends StatefulWidget {
   static const String id = "question_3";
   const Question3({Key? key}) : super(key: key);
@@ -22,10 +24,10 @@ class Question3 extends StatefulWidget {
 }
 
 class _Question3State extends State<Question3> {
-  String dropdownValue = 'One';
   String? selectedValue_years;
   String? selectedValue_months;
   List<String> items1 = [
+    '0',
     '1',
     '2',
     '3',
@@ -43,6 +45,7 @@ class _Question3State extends State<Question3> {
     '15'
   ];
   List<String> items2 = [
+    '0',
     '1',
     '2',
     '3',
@@ -125,7 +128,6 @@ class _Question3State extends State<Question3> {
                             selectedValue_years = value as String;
                           });
                         },
-                        focusColor: mainColor,
                         iconEnabledColor: mainColor,
                         selectedItemHighlightColor: mainColor,
                         buttonHeight: 60,
@@ -171,7 +173,6 @@ class _Question3State extends State<Question3> {
                             selectedValue_months = value as String;
                           });
                         },
-                        focusColor: mainColor,
                         iconEnabledColor: mainColor,
                         selectedItemHighlightColor: mainColor,
                         buttonHeight: 60,
@@ -194,7 +195,19 @@ class _Question3State extends State<Question3> {
             RoundedButton(
                 buttonText: 'Next',
                 onPressed: () {
-                  Navigator.pushNamed(context, Question4.id);
+                  (selectedValue_months == null || selectedValue_years == null)
+                      ? showDialog<void>(
+                          context: context,
+                          barrierDismissible: false, // user must tap button!
+                          builder: (BuildContext context) {
+                            return AlertBox(
+                              titleText: 'Please select the age of your pet!',
+                              bodyText:
+                                  'You must specify both the years and the months.',
+                            );
+                          },
+                        )
+                      : Navigator.pushNamed(context, Question4.id);
                 })
           ],
         ),

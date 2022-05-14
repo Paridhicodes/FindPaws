@@ -12,6 +12,8 @@ import 'dart:io';
 import 'dart:async';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
+import '../../../components/AlertBox.dart';
+
 class Question2 extends StatefulWidget {
   static const String id = "question_2";
   const Question2({Key? key}) : super(key: key);
@@ -22,7 +24,7 @@ class Question2 extends StatefulWidget {
 
 class _Question2State extends State<Question2> {
   @override
-  late String _character = "female";
+  late String _character = "none";
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -110,7 +112,19 @@ class _Question2State extends State<Question2> {
             RoundedButton(
                 buttonText: 'Next',
                 onPressed: () {
-                  Navigator.pushNamed(context, Question3.id);
+                  _character == "none"
+                      ? showDialog<void>(
+                          context: context,
+                          barrierDismissible: false, // user must tap button!
+                          builder: (BuildContext context) {
+                            return AlertBox(
+                              titleText:
+                                  'Please select the gender of your pet!',
+                              bodyText: '',
+                            );
+                          },
+                        )
+                      : Navigator.pushNamed(context, Question3.id);
                 })
           ],
         ),
