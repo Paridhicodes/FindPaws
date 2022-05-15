@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.find_paws_engage">
-   <application
-        android:label="find_paws_engage"
+   <application android:requestLegacyExternalStorage="true"
+       android:label="find_paws_engage"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

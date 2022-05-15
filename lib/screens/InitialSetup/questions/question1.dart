@@ -34,13 +34,16 @@ class _Question1State extends State<Question1> {
             const SizedBox(
               height: 30,
             ),
-            const StepProgressIndicator(
-              totalSteps: 4,
-              currentStep: 1,
-              selectedColor: Color(0xffdb8207),
-              unselectedColor: Color(0xFFf5c489),
-              size: 10,
-              roundedEdges: Radius.circular(10),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: StepProgressIndicator(
+                totalSteps: 4,
+                currentStep: 1,
+                selectedColor: Color(0xffdb8207),
+                unselectedColor: Color(0xFFf5c489),
+                size: 10,
+                roundedEdges: Radius.circular(10),
+              ),
             ),
             const SizedBox(
               height: 30,
@@ -50,9 +53,13 @@ class _Question1State extends State<Question1> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  child: const Text(
-                    "What is the name of your pet?",
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "What is the name of your dog?",
+                      style:
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
               ),

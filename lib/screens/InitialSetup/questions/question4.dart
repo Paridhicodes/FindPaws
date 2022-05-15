@@ -36,13 +36,16 @@ class _Question4State extends State<Question4> {
             const SizedBox(
               height: 30,
             ),
-            const StepProgressIndicator(
-              totalSteps: 4,
-              currentStep: 4,
-              selectedColor: Color(0xffdb8207),
-              unselectedColor: Color(0xFFf5c489),
-              size: 10,
-              roundedEdges: Radius.circular(10),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: StepProgressIndicator(
+                totalSteps: 4,
+                currentStep: 4,
+                selectedColor: Color(0xffdb8207),
+                unselectedColor: Color(0xFFf5c489),
+                size: 10,
+                roundedEdges: Radius.circular(10),
+              ),
             ),
             const SizedBox(
               height: 30,
@@ -52,9 +55,13 @@ class _Question4State extends State<Question4> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  child: const Text(
-                    "Is your pet safe?",
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "Is your dog safe?",
+                      style:
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
               ),
@@ -76,7 +83,7 @@ class _Question4State extends State<Question4> {
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    "Yes, my pet is safe!",
+                    "Yes, my dog is safe!",
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                 ),
@@ -97,7 +104,7 @@ class _Question4State extends State<Question4> {
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    "No, my pet is lost!",
+                    "No, my dog is lost!",
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                 ),
@@ -119,7 +126,7 @@ class _Question4State extends State<Question4> {
                           barrierDismissible: false, // user must tap button!
                           builder: (BuildContext context) {
                             return AlertBox(
-                              titleText: 'Let us know if your pet is safe.',
+                              titleText: 'Let us know if your dog is safe.',
                               bodyText: '',
                             );
                           },

@@ -1,3 +1,4 @@
+import 'package:find_paws_engage/constants.dart';
 import 'package:flutter/material.dart';
 
 class AlertBox extends StatelessWidget {
@@ -21,6 +22,7 @@ class AlertBox extends StatelessWidget {
             'Ok',
             style: TextStyle(
               fontSize: 18,
+              color: mainColor,
             ),
           ),
           onPressed: () {

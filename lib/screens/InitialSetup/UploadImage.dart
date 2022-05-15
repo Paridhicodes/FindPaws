@@ -1,3 +1,5 @@
+import 'package:find_paws_engage/components/AlertBox.dart';
+import 'package:find_paws_engage/get_breed.dart';
 import 'package:find_paws_engage/screens/InitialSetup/display_breed.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question1.dart';
 import 'package:find_paws_engage/storage.dart';
@@ -32,6 +34,7 @@ class _UploadImageState extends State<UploadImage> {
   var imagePath;
   var imageName;
   String imageUrl = "";
+  List<dynamic> ls = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,13 +124,74 @@ class _UploadImageState extends State<UploadImage> {
                           RoundedButton(
                             buttonText: 'Next',
                             onPressed: () async {
-                              storage.uploadFile(imagePath, imageName);
-                              var downurl =
-                                  await storage.downloadUrl(imageName);
-                              print(downurl);
-                              await Navigator.pushNamed(
-                                  context, DisplayBreed.id,
-                                  arguments: downurl);
+                              // checkBreed();
+                              GetBreed _getBreed =
+                                  GetBreed(imageLink: imagePath);
+                              List list = await _getBreed.initialFunc();
+                              print(list);
+                              print(list.length);
+                              if (!list.isEmpty) {
+                                await storage.uploadFile(imagePath, imageName);
+                                var downurl =
+                                    await storage.downloadUrl(imageName);
+                                print(downurl);
+                                await Navigator.pushNamed(
+                                    context, Question1.id);
+                              } else {
+                                showDialog<void>(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text(
+                                          'Please upload a clear image of your dog.'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'The image of your dog must be front-facing and must have proper lighting.'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text(
+                                            'Ok',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: mainColor,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.pushNamed(
+                                                context, UploadImage.id);
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                    // return AlertBox(
+                                    //   titleText:
+                                    //       'Please upload a clear image of your dog.',
+                                    //   bodyText:
+                                    //       'The image of your dog must be front-facing and must have proper lighting.',
+                                    // );
+                                  },
+                                );
+                              }
+
+                              // print(imagePath);
+                              // print(File(imagePath));
+
+                              // setState(() async {
+                              //   ls = list;
+                              //   print("taken");
+                              // });
+
+                              // await Navigator.pushNamed(
+                              //   context,
+                              //   DisplayBreed.id,
+                              // );
                             },
                           )
                         ],
@@ -142,47 +206,24 @@ class _UploadImageState extends State<UploadImage> {
 
   /// Get from gallery
   _getFromGallery() async {
-    // PickedFile? pickedFile = await ImagePicker().getImage(
-    //   source: ImageSource.gallery,
-    //   maxWidth: 1800,
-    //   maxHeight: 1800,
-    // );
-    // if (pickedFile != null) {
-    //   setState(() {
-    //     imageFile = File(pickedFile.path);
-    //     imageName = imageFile.split('/').last;
-    //   });
-    // }
     final results = await FilePicker.platform.pickFiles(
       allowMultiple: false,
       type: FileType.custom,
-      allowedExtensions: ['png', 'jpg'],
+      allowedExtensions: ['png', 'jpg', 'jpeg'],
     );
 
     if (results != null) {
       setState(() {
         imagePath = results.files.single.path;
         imageName = results.files.single.name;
-        print(imageName);
-        print(imagePath);
+
+        // print(imageName);
+        // print(imagePath);
       });
     }
   }
 
-  /// Get from Camera
-  // _getFromCamera() async {
-  //   await Permission.photos.request();
-  //   PickedFile? pickedFile = await ImagePicker().getImage(
-  //     source: ImageSource.camera,
-  //     maxWidth: 1800,
-  //     maxHeight: 1800,
-  //   );
-  //   if (pickedFile != null) {
-  //     setState(() {
-  //       imageFile = File(pickedFile.path);
-  //
-  //       print(imageFile);
-  //     });
-  //   }
-  // }
+  void checkBreed() async {
+    // print(ls);
+  }
 }

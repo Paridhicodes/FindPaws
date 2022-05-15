@@ -39,7 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 100,
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(right: 100),
+                    padding: EdgeInsets.only(right: 90),
                     child: Text(
                       'Sign Up',
                       style: TextStyle(

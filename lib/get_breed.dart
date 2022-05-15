@@ -6,15 +6,13 @@ class GetBreed {
   final String imageLink;
   GetBreed({required this.imageLink});
 
-  String result = '';
-  Image? image;
+  List _recognitions = [];
 
-  Future<String> initState() async {
-    image = Image.network(imageLink);
+  Future<List> initialFunc() async {
     loadModel();
-    runModelOnImage();
-    await Tflite.close();
-    return result;
+    await recognizeImage(imageLink);
+
+    return _recognitions;
   }
 
   loadModel() async {
@@ -22,22 +20,17 @@ class GetBreed {
         model: 'assets/model.tflite', labels: 'assets/labels.txt');
   }
 
-  runModelOnImage() async {
-    if (image != null) {
-      var recognitions = await Tflite.runModelOnImage(
-          path: imageLink,
-          imageMean: 127.5, // defaults to 117.0
-          imageStd: 127.5, // defaults to 1.0
-          numResults: 2, // defaults to 5
-          threshold: 0.1, // defaults to 0.1
-          asynch: true);
-      result = '';
-      for (var response in recognitions!) {
-        result += response['label'] +
-            " " +
-            (response['confidence'] as double).toStringAsFixed(2) +
-            "\n\n";
-      }
+  Future recognizeImage(String imageLink) async {
+    var recognitions = await Tflite.runModelOnImage(
+      path: imageLink,
+      numResults: 2,
+      threshold: 0.1,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
+    if (recognitions != null) {
+      _recognitions = recognitions;
+      // print(recognitions);
     }
   }
 }

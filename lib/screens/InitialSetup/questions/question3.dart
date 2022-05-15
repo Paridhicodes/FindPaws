@@ -68,13 +68,16 @@ class _Question3State extends State<Question3> {
             const SizedBox(
               height: 30,
             ),
-            const StepProgressIndicator(
-              totalSteps: 4,
-              currentStep: 3,
-              selectedColor: Color(0xffdb8207),
-              unselectedColor: Color(0xFFf5c489),
-              size: 10,
-              roundedEdges: Radius.circular(10),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: StepProgressIndicator(
+                totalSteps: 4,
+                currentStep: 3,
+                selectedColor: Color(0xffdb8207),
+                unselectedColor: Color(0xFFf5c489),
+                size: 10,
+                roundedEdges: Radius.circular(10),
+              ),
             ),
             const SizedBox(
               height: 30,
@@ -84,14 +87,18 @@ class _Question3State extends State<Question3> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  child: const Text(
-                    "What is the age of your pet?",
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "What is the age of your dog?",
+                      style:
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Row(
@@ -201,7 +208,7 @@ class _Question3State extends State<Question3> {
                           barrierDismissible: false, // user must tap button!
                           builder: (BuildContext context) {
                             return AlertBox(
-                              titleText: 'Please select the age of your pet!',
+                              titleText: 'Please select the age of your dog!',
                               bodyText:
                                   'You must specify both the years and the months.',
                             );

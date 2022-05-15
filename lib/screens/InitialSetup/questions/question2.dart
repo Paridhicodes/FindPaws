@@ -34,13 +34,16 @@ class _Question2State extends State<Question2> {
             const SizedBox(
               height: 30,
             ),
-            const StepProgressIndicator(
-              totalSteps: 4,
-              currentStep: 2,
-              selectedColor: Color(0xffdb8207),
-              unselectedColor: Color(0xFFf5c489),
-              size: 10,
-              roundedEdges: Radius.circular(10),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: StepProgressIndicator(
+                totalSteps: 4,
+                currentStep: 2,
+                selectedColor: Color(0xffdb8207),
+                unselectedColor: Color(0xFFf5c489),
+                size: 10,
+                roundedEdges: Radius.circular(10),
+              ),
             ),
             const SizedBox(
               height: 30,
@@ -50,14 +53,18 @@ class _Question2State extends State<Question2> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  child: const Text(
-                    "What is the gender of your pet?",
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "What is the gender of your dog?",
+                      style:
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Column(
@@ -119,7 +126,7 @@ class _Question2State extends State<Question2> {
                           builder: (BuildContext context) {
                             return AlertBox(
                               titleText:
-                                  'Please select the gender of your pet!',
+                                  'Please select the gender of your dog!',
                               bodyText: '',
                             );
                           },

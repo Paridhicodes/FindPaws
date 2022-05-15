@@ -155,3 +155,56 @@ class _GetBreedState extends State<GetBreed> {
   }
 }
 
+    // PickedFile? pickedFile = await ImagePicker().getImage(
+    //   source: ImageSource.gallery,
+    //   maxWidth: 1800,
+    //   maxHeight: 1800,
+    // );
+    // if (pickedFile != null) {
+    //   setState(() {
+    //     imageFile = File(pickedFile.path);
+    //     imageName = imageFile.split('/').last;
+    //   });
+    // }
+
+      /// Get from Camera
+      // _getFromCamera() async {
+      //   await Permission.photos.request();
+      //   PickedFile? pickedFile = await ImagePicker().getImage(
+      //     source: ImageSource.camera,
+      //     maxWidth: 1800,
+      //     maxHeight: 1800,
+      //   );
+      //   if (pickedFile != null) {
+      //     setState(() {
+      //       imageFile = File(pickedFile.path);
+      //
+      //       print(imageFile);
+      //     });
+      //   }
+      // }
+
+        // runModelOnImageUser() async {
+        //   print("entered this also");
+        //   if (imageLink.isNotEmpty) {
+        //     var recognitions = await Tflite.runModelOnImage(
+        //       path: imageLink,
+        //       imageMean: 127.5,
+        //       // defaults to 117.0
+        //       imageStd: 127.5,
+        //       // defaults to 1.0
+        //       numResults: 2,
+        //       // defaults to 5
+        //       threshold: 0.1, // defaults to 0.1
+        //       // asynch: true,
+        //     );
+        //     result = '';
+        //     for (var response in recognitions!) {
+        //       result += response['label'] +
+        //           " " +
+        //           (response['confidence'] as double).toStringAsFixed(2) +
+        //           "\n\n";
+        //     }
+        //   }
+        // }
+
