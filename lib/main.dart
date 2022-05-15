@@ -1,4 +1,5 @@
 import 'package:find_paws_engage/screens/InitialSetup/UploadImage.dart';
+import 'package:find_paws_engage/screens/InitialSetup/display_breed.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question1.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question2.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question3.dart';
@@ -43,6 +44,7 @@ class findPaws extends StatelessWidget {
         Question2.id: (context) => Question2(),
         Question3.id: (context) => Question3(),
         Question4.id: (context) => Question4(),
+        DisplayBreed.id: (context) => DisplayBreed(imageLink: ''),
       },
     );
   }

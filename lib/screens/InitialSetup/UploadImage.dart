@@ -1,3 +1,4 @@
+import 'package:find_paws_engage/screens/InitialSetup/display_breed.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question1.dart';
 import 'package:find_paws_engage/storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -84,17 +85,6 @@ class _UploadImageState extends State<UploadImage> {
                                   ),
                                 ),
                               ),
-                              // Expanded(
-                              //   child: Padding(
-                              //     padding: const EdgeInsets.all(8s.0),
-                              //     child: RoundedButton(
-                              //       buttonText: 'From Camera',
-                              //       onPressed: () {
-                              //         _getFromCamera();
-                              //       },
-                              //     ),
-                              //   ),
-                              // ),
                             ],
                           )
                         ],
@@ -135,7 +125,9 @@ class _UploadImageState extends State<UploadImage> {
                               var downurl =
                                   await storage.downloadUrl(imageName);
                               print(downurl);
-                              await Navigator.pushNamed(context, Question1.id);
+                              await Navigator.pushNamed(
+                                  context, DisplayBreed.id,
+                                  arguments: downurl);
                             },
                           )
                         ],

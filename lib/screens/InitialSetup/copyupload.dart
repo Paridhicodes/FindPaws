@@ -90,3 +90,68 @@
 //     }
 //   }
 // }
+
+//-----------------------------------------
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tflite/tflite.dart';
+
+class GetBreed extends StatefulWidget {
+  final String imageLink;
+  const GetBreed({required this.imageLink});
+
+  @override
+  _GetBreedState createState() => _GetBreedState();
+}
+
+class _GetBreedState extends State<GetBreed> {
+  bool isWorking = false;
+  String result = '';
+  Image? image;
+  Widget build(BuildContext context) {
+    return Container();
+  }
+
+  loadModel() async {
+    await Tflite.loadModel(
+        model: 'assets/model.tflite', labels: 'assets/labels.txt');
+  }
+
+  runModelOnImage() async {
+    if (image != null) {
+      var recognitions = await Tflite.runModelOnImage(
+          path: widget.imageLink,
+          imageMean: 127.5, // defaults to 117.0
+          imageStd: 127.5, // defaults to 1.0
+          numResults: 2, // defaults to 5
+          threshold: 0.1, // defaults to 0.1
+          asynch: true);
+      result = '';
+      for (var response in recognitions!) {
+        result += response['label'] +
+            " " +
+            (response['confidence'] as double).toStringAsFixed(2) +
+            "\n\n";
+      }
+      setState(() {
+        result;
+      });
+
+      isWorking = false;
+    }
+  }
+
+  @override
+  void initState() async {
+    // TODO: implement initState
+    super.initState();
+    image = Image.network(widget.imageLink);
+    loadModel();
+
+    runModelOnImage();
+    super.dispose();
+    await Tflite.close();
+  }
+}
+

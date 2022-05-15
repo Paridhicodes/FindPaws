@@ -48,14 +48,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 98.0,
                 ),
                 AppButton(
                   buttonText: "Join Us",
-                    onPressed: () => Navigator.pushNamed(context, RegisterScreen.id),
+                  onPressed: () =>
+                      Navigator.pushNamed(context, RegisterScreen.id),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 AppButton(
@@ -64,12 +65,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     print("Found");
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 110,
                 ),
                 TextButton(
                   onPressed: () => Navigator.pushNamed(context, LoginScreen.id),
-                  child: Text(
+                  child: const Text(
                     "Already have an account? Login",
                     style: TextStyle(
                       fontSize: 21,
