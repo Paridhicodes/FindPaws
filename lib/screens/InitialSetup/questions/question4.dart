@@ -1,4 +1,5 @@
 import 'package:find_paws_engage/screens/InitialSetup/questions/question3.dart';
+import 'package:find_paws_engage/screens/owner_core/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:find_paws_engage/constants.dart';
@@ -28,6 +29,8 @@ class _Question4State extends State<Question4> {
   bool pressAttention2 = false;
   bool safe = true;
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -39,8 +42,8 @@ class _Question4State extends State<Question4> {
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: StepProgressIndicator(
-                totalSteps: 4,
-                currentStep: 4,
+                totalSteps: 5,
+                currentStep: 5,
                 selectedColor: Color(0xffdb8207),
                 unselectedColor: Color(0xFFf5c489),
                 size: 10,
@@ -131,7 +134,16 @@ class _Question4State extends State<Question4> {
                             );
                           },
                         )
-                      : Navigator.pushNamed(context, Question4.id);
+                      : Navigator.pushNamed(context, HomeScreen.id, arguments: {
+                          'url': arguments['url'],
+                          'list': arguments['list'],
+                          'breed': arguments['breed'],
+                          'name': arguments['name'],
+                          'gender': arguments['gender'],
+                          'years': arguments['years'],
+                          'months': arguments['months'],
+                          'isSafe': safe
+                        });
                 })
           ],
         ),

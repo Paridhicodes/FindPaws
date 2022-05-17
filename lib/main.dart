@@ -1,11 +1,13 @@
 import 'package:find_paws_engage/screens/InitialSetup/UploadImage.dart';
-import 'package:find_paws_engage/screens/InitialSetup/display_breed.dart';
+import 'package:find_paws_engage/screens/InitialSetup/questions/display_breed.dart';
+
 import 'package:find_paws_engage/screens/InitialSetup/questions/question1.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question2.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question3.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question4.dart';
 import 'package:find_paws_engage/screens/login_signup/login_screen.dart';
 import 'package:find_paws_engage/screens/login_signup/signup_screen.dart';
+import 'package:find_paws_engage/screens/owner_core/home_screen.dart';
 import 'package:find_paws_engage/screens/splash_screen.dart';
 import 'package:find_paws_engage/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +46,8 @@ class findPaws extends StatelessWidget {
         Question2.id: (context) => Question2(),
         Question3.id: (context) => Question3(),
         Question4.id: (context) => Question4(),
+        DisplayBreed.id: (context) => DisplayBreed(),
+        HomeScreen.id: (context) => HomeScreen(),
         // DisplayBreed.id: (context) => DisplayBreed(),
       },
     );

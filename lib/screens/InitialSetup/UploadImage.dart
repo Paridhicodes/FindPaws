@@ -1,6 +1,7 @@
 import 'package:find_paws_engage/components/AlertBox.dart';
 import 'package:find_paws_engage/get_breed.dart';
-import 'package:find_paws_engage/screens/InitialSetup/display_breed.dart';
+import 'package:find_paws_engage/screens/InitialSetup/questions/display_breed.dart';
+
 import 'package:find_paws_engage/screens/InitialSetup/questions/question1.dart';
 import 'package:find_paws_engage/storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,6 +35,7 @@ class _UploadImageState extends State<UploadImage> {
   var imagePath;
   var imageName;
   String imageUrl = "";
+  String downurl = '';
   List<dynamic> ls = [];
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,9 @@ class _UploadImageState extends State<UploadImage> {
                               title: Text(
                                 "Add a cute photo of your pet!",
                                 style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.w700),
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
                               subtitle: Text(
                                 "Choose a front facing picture, similar to a passport photo.",
@@ -79,7 +83,8 @@ class _UploadImageState extends State<UploadImage> {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(70, 8, 70, 8),
                                   child: RoundedButton(
                                     buttonText: 'From Gallery',
                                     onPressed: () {
@@ -128,15 +133,14 @@ class _UploadImageState extends State<UploadImage> {
                               GetBreed _getBreed =
                                   GetBreed(imageLink: imagePath);
                               List list = await _getBreed.initialFunc();
-                              print(list);
-                              print(list.length);
+
                               if (!list.isEmpty) {
                                 await storage.uploadFile(imagePath, imageName);
-                                var downurl =
-                                    await storage.downloadUrl(imageName);
-                                print(downurl);
+                                downurl = await storage.downloadUrl(imageName);
+
                                 await Navigator.pushNamed(
-                                    context, Question1.id);
+                                    context, DisplayBreed.id,
+                                    arguments: {'url': downurl, 'list': list});
                               } else {
                                 showDialog<void>(
                                   context: context,
@@ -166,6 +170,7 @@ class _UploadImageState extends State<UploadImage> {
                                           onPressed: () {
                                             Navigator.pushNamed(
                                                 context, UploadImage.id);
+                                            ;
                                           },
                                         ),
                                       ],
@@ -221,9 +226,5 @@ class _UploadImageState extends State<UploadImage> {
         // print(imagePath);
       });
     }
-  }
-
-  void checkBreed() async {
-    // print(ls);
   }
 }

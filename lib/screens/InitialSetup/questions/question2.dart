@@ -26,6 +26,8 @@ class _Question2State extends State<Question2> {
   @override
   late String _character = "none";
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -37,8 +39,8 @@ class _Question2State extends State<Question2> {
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: StepProgressIndicator(
-                totalSteps: 4,
-                currentStep: 2,
+                totalSteps: 5,
+                currentStep: 3,
                 selectedColor: Color(0xffdb8207),
                 unselectedColor: Color(0xFFf5c489),
                 size: 10,
@@ -78,7 +80,7 @@ class _Question2State extends State<Question2> {
                   ),
                   leading: Radio<String>(
                     activeColor: mainColor,
-                    splashRadius: 40,
+                    splashRadius: 70,
                     value: "Male",
                     groupValue: _character,
                     onChanged: (value) {
@@ -100,7 +102,7 @@ class _Question2State extends State<Question2> {
                   ),
                   leading: Radio<String>(
                     activeColor: mainColor,
-                    splashRadius: 40,
+                    splashRadius: 70,
                     value: "Female",
                     groupValue: _character,
                     onChanged: (value) {
@@ -131,7 +133,13 @@ class _Question2State extends State<Question2> {
                             );
                           },
                         )
-                      : Navigator.pushNamed(context, Question3.id);
+                      : Navigator.pushNamed(context, Question3.id, arguments: {
+                          'url': arguments['url'],
+                          'list': arguments['list'],
+                          'breed': arguments['breed'],
+                          'name': arguments['name'],
+                          'gender': _character,
+                        });
                 })
           ],
         ),
