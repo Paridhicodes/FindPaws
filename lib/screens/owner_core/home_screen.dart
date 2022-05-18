@@ -17,6 +17,10 @@ import 'dart:async';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:find_paws_engage/components/AlertBox.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:find_paws_engage/components/CardLayout.dart';
+
+import '../login_signup/login_screen.dart';
+import '../welcome_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = "home_screen";
@@ -34,6 +38,35 @@ class _HomeScreenState extends State<HomeScreen> {
   late final selectedDoc;
   String userName = '';
 
+  final List<Widget> widgetList = [
+    CardLayout(
+      imageLink: 'images/card7.jpg',
+      mainText: 'MainText1',
+      subText: 'SubText1',
+      onPressed: () {
+        print('1');
+      },
+      buttonText: 'Manage',
+    ),
+    CardLayout(
+      imageLink: 'images/card8.jpg',
+      mainText: 'MainText2',
+      subText: 'SubText2',
+      onPressed: () {
+        print('2');
+      },
+      buttonText: 'Link',
+    ),
+    CardLayout(
+      imageLink: 'images/card9.jpg',
+      mainText: 'MainText3',
+      subText: 'SubText3',
+      onPressed: () {
+        print('3');
+      },
+      buttonText: 'Update',
+    ),
+  ];
   @override
   void initState() {
     super.initState();
@@ -55,6 +88,13 @@ class _HomeScreenState extends State<HomeScreen> {
       print(e);
       Navigator.pop(context);
     }
+  }
+
+  Future logout() async {
+    await _auth.signOut().then((value) => Navigator.of(context)
+        .pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => WelcomeScreen()),
+            (route) => false));
   }
 
   void getDoc() async {
@@ -85,7 +125,14 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.logout),
+                child: TextButton(
+                    child: Icon(
+                      Icons.logout,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      logout();
+                    }),
               )
             ],
           ),
@@ -113,20 +160,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                // ListView.builder(
-                //   scrollDirection: Axis.horizontal,
-                //   itemCount: 3,
-                //   itemBuilder: (BuildContext context, int index) {
-                //     return Container(
-                //       child: Text(
-                //         'Hello',
-                //         style: TextStyle(
-                //           fontSize: 45,
-                //         ),
-                //       ),
-                //     );
-                //   },
-                // ),
               ],
             ),
           ),
@@ -134,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
               child: SizedBox(
-                height: 400,
+                height: 390,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: 3,
@@ -154,111 +187,5 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
-  Widget buildCard(int index) => Card(
-        elevation: 10,
-        shadowColor: Colors.black,
-        color: Colors.white,
-        child: SizedBox(
-          width: 250,
-          height: 400,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                //CircleAvatar
-                SizedBox(
-                  height: 10,
-                ), //SizedBox
-                //Text
-                SizedBox(
-                  height: 10,
-                ),
-
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    // child: Image.asset(
-                    //   'images/image1.jpeg',
-                    // ),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage('./images/image1.jpeg'),
-                        ),
-                      ),
-                    ) // Container(
-                    //   width: MediaQuery.of(context).size.width,
-                    //   height: 100,
-                    //   decoration: BoxDecoration(
-                    //     image: DecorationImage(
-                    //       fit: BoxFit.fill,
-                    //       image: NetworkImage("https://picsum.photos/250?image=9"),
-                    //     ),
-                    //   ),
-                    // )
-                    ), //Text
-                SizedBox(
-                  height: 15,
-                ),
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
-                      child: Text("My Pet Family",
-                          style: TextStyle(
-                            fontSize: 19,
-                            fontWeight: FontWeight.w700,
-                          )),
-                    )),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Update your pet's information",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                SizedBox(
-                  height: 35,
-                ),
-                MaterialButton(
-                  onPressed: () {},
-                  color: mainColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Manage',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  minWidth: 150,
-                  elevation: 5.0,
-                )
-
-                //SizedBox
-                // SizedBox(
-                //   width: 80,
-                //   child: RaisedButton(
-                //     onPressed: () => null,
-                //     color: Colors.green,
-                //     child: Padding(
-                //       padding: const EdgeInsets.all(4.0),
-                //       child: Row(
-                //         children: [
-                //           Icon(Icons.touch_app),
-                //           Text('Visit'),
-                //         ],
-                //       ), //Row
-                //     ), //Padding
-                //   ), //RaisedButton
-                // ), //SizedBox
-              ],
-            ), //Column
-          ), //Padding
-        ),
-      );
+  Widget buildCard(int index) => widgetList[index];
 }
