@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late String userId;
   late final selectedDoc;
   String userName = '';
+  var arguments;
 
   final List<Widget> widgetList = [
     CardLayout(
@@ -70,6 +71,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration.zero, () {
+      setState(() {
+        arguments = (ModalRoute.of(context)?.settings.arguments ??
+            <String, dynamic>{}) as Map;
+      });
+      addToDb(arguments);
+    });
     getCurrentUser();
     getDoc();
   }
@@ -107,6 +115,19 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void addToDb(final arguments) {
+    _firestore.collection('pets').add({
+      "age_months": arguments['months'],
+      "age_years": arguments['years'],
+      'breed': arguments['breed'],
+      'gender': arguments['gender'],
+      'image_url': arguments['url'],
+      'lost': arguments['isSafe'],
+      'name': arguments['name'],
+      'owner_id': userId
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
                 child: TextButton(
                     child: Icon(
                       Icons.logout,
