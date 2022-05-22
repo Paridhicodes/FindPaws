@@ -86,7 +86,7 @@ class CardLayout extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 35,
+                height: 20,
               ),
               MaterialButton(
                 onPressed: onPressed,
@@ -95,7 +95,7 @@ class CardLayout extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     buttonText,
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
                 shape: RoundedRectangleBorder(

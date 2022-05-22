@@ -76,6 +76,12 @@ flutter:
       fonts:
         - asset: fonts/OleoScript-Regular.ttf
         - asset: fonts/OleoScript-Bold.ttf
+    - family: CustomIcons
+      fonts:
+        - asset: fonts/CustomIcons.ttf
+    - family: CustomIconsPaws
+      fonts:
+        - asset: fonts/CustomIconsPaws.ttf
   uses-material-design: true
   assets:
     - images/

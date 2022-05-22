@@ -5,8 +5,10 @@ import 'package:find_paws_engage/screens/InitialSetup/questions/question1.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question2.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question3.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question4.dart';
+import 'package:find_paws_engage/screens/edit_pages/dog_profile_edit.dart';
 import 'package:find_paws_engage/screens/login_signup/login_screen.dart';
 import 'package:find_paws_engage/screens/login_signup/signup_screen.dart';
+import 'package:find_paws_engage/screens/owner_core/MyDogsScreen.dart';
 import 'package:find_paws_engage/screens/owner_core/home_screen.dart';
 import 'package:find_paws_engage/screens/splash_screen.dart';
 import 'package:find_paws_engage/screens/welcome_screen.dart';
@@ -48,6 +50,8 @@ class findPaws extends StatelessWidget {
         Question4.id: (context) => Question4(),
         DisplayBreed.id: (context) => DisplayBreed(),
         HomeScreen.id: (context) => HomeScreen(),
+        DogProfileEdit.id: (context) => DogProfileEdit(),
+        MyDogsScreen.id: (context) => MyDogsScreen(),
         // DisplayBreed.id: (context) => DisplayBreed(),
       },
     );
