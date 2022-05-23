@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_paws_engage/custom_icons_icons.dart';
 import 'package:find_paws_engage/custom_icons_paws_icons.dart';
+import 'package:find_paws_engage/screens/InitialSetup/UploadImage.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question2.dart';
 import 'package:find_paws_engage/screens/edit_pages/dog_profile_edit.dart';
 import 'package:find_paws_engage/screens/owner_core/MyDogsScreen.dart';
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String userName = '';
   var arguments;
   List<Widget> widgetList = [];
-  final PageStorageBucket bucket = PageStorageBucket();
+
   Widget currentScreen = HomeScreen();
   int currentTab = 0;
 
@@ -116,17 +117,15 @@ class _HomeScreenState extends State<HomeScreen> {
         imageLink: 'images/card7.jpg',
         mainText: 'Found a dog',
         subText: 'If you found a dog, help us find it\'s owner.',
-        onPressed: () {
-          Navigator.pushNamed(context, DogProfileEdit.id);
-        },
-        buttonText: 'Manage',
+        onPressed: () {},
+        buttonText: 'Scan',
       ),
       CardLayout(
         imageLink: 'images/card8.jpg',
         mainText: 'Update information',
         subText: 'You can update the information about your dog here!',
         onPressed: () {
-          print('2');
+          Navigator.pushNamed(context, DogProfileEdit.id);
         },
         buttonText: 'Update',
       ),
@@ -235,19 +234,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                 currentScreen = HomeScreen();
                                 currentTab = 0;
                               });
-                              print('home pressed');
-                              Navigator.pushNamed(context, HomeScreen.id);
+
+                              Navigator.pushNamed(context, UploadImage.id);
                             },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
-                                  Icons.home,
+                                  Icons.add,
                                   color: Colors.white,
                                   size: 20,
                                 ),
                                 Text(
-                                  'Home',
+                                  'Add Dog',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 12,

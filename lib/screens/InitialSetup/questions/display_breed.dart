@@ -15,7 +15,7 @@ import 'package:find_paws_engage/components/AppBarInit.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:permission_handler/permission_handler.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';

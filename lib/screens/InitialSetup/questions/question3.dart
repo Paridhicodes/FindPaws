@@ -204,7 +204,10 @@ class _Question3State extends State<Question3> {
             RoundedButton(
                 buttonText: 'Next',
                 onPressed: () {
-                  (selectedValue_months == null || selectedValue_years == null)
+                  (selectedValue_months == null ||
+                          selectedValue_years == null ||
+                          (selectedValue_months == '0' &&
+                              selectedValue_years == '0'))
                       ? showDialog<void>(
                           context: context,
                           barrierDismissible: false, // user must tap button!

@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 class AlertBox extends StatelessWidget {
   final String titleText;
   final String bodyText;
-  AlertBox({required this.titleText, required this.bodyText});
+  String finalText = 'Ok';
+
+  AlertBox({
+    required this.titleText,
+    required this.bodyText,
+    this.finalText = 'Ok',
+  });
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -18,8 +24,8 @@ class AlertBox extends StatelessWidget {
       ),
       actions: <Widget>[
         TextButton(
-          child: const Text(
-            'Ok',
+          child: Text(
+            finalText,
             style: TextStyle(
               fontSize: 18,
               color: mainColor,

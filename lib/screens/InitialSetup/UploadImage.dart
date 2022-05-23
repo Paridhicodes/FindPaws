@@ -1,8 +1,10 @@
 import 'package:find_paws_engage/components/AlertBox.dart';
 import 'package:find_paws_engage/get_breed.dart';
+import 'package:find_paws_engage/get_dog_cat.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/display_breed.dart';
 
 import 'package:find_paws_engage/screens/InitialSetup/questions/question1.dart';
+import 'package:find_paws_engage/screens/owner_core/home_screen.dart';
 import 'package:find_paws_engage/storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,7 @@ import 'package:find_paws_engage/components/AppBarInit.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:permission_handler/permission_handler.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
 
@@ -77,7 +79,7 @@ class _UploadImageState extends State<UploadImage> {
                             height: 250,
                           ),
                           const SizedBox(
-                            height: 100,
+                            height: 60,
                           ),
                           Row(
                             children: [
@@ -92,6 +94,30 @@ class _UploadImageState extends State<UploadImage> {
                                     },
                                   ),
                                 ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                child: Text(
+                                  'Skip to Home',
+                                  style: TextStyle(
+                                      shadows: [
+                                        Shadow(
+                                            color: mainColor,
+                                            offset: Offset(0, -5))
+                                      ],
+                                      color: Colors.transparent,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: mainColor,
+                                      decorationThickness: 4,
+                                      fontSize: 20),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, HomeScreen.id);
+                                },
                               ),
                             ],
                           )
@@ -134,7 +160,49 @@ class _UploadImageState extends State<UploadImage> {
                                   GetBreed(imageLink: imagePath);
                               List list = await _getBreed.initialFunc();
 
-                              if (!list.isEmpty) {
+                              GetDogCat _getDogCat =
+                                  GetDogCat(imageLink: imagePath);
+
+                              List sec_list = await _getDogCat.initialFunc();
+                              print(sec_list);
+                              if (!sec_list.isEmpty &&
+                                  sec_list[0]['label'] == 'Cat') {
+                                showDialog<void>(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text(
+                                          'You have uploaded the image of a cat!'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'You are required to upload a clear image of your dog.'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text(
+                                            'Ok',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: mainColor,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.pushNamed(
+                                                context, UploadImage.id);
+                                            ;
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else if (!list.isEmpty) {
                                 await storage.uploadFile(imagePath, imageName);
                                 downurl = await storage.downloadUrl(imageName);
 
@@ -175,28 +243,9 @@ class _UploadImageState extends State<UploadImage> {
                                         ),
                                       ],
                                     );
-                                    // return AlertBox(
-                                    //   titleText:
-                                    //       'Please upload a clear image of your dog.',
-                                    //   bodyText:
-                                    //       'The image of your dog must be front-facing and must have proper lighting.',
-                                    // );
                                   },
                                 );
                               }
-
-                              // print(imagePath);
-                              // print(File(imagePath));
-
-                              // setState(() async {
-                              //   ls = list;
-                              //   print("taken");
-                              // });
-
-                              // await Navigator.pushNamed(
-                              //   context,
-                              //   DisplayBreed.id,
-                              // );
                             },
                           )
                         ],

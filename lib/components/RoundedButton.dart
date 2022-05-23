@@ -4,7 +4,13 @@ import 'package:find_paws_engage/constants.dart';
 class RoundedButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback? onPressed;
-  RoundedButton({required this.buttonText, required this.onPressed});
+  double textSize = 25;
+  double buttonSize = 150;
+  RoundedButton(
+      {required this.buttonText,
+      required this.onPressed,
+      this.textSize = 25,
+      this.buttonSize = 150});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +21,13 @@ class RoundedButton extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Text(
           this.buttonText,
-          style: TextStyle(color: Colors.white, fontSize: 25),
+          style: TextStyle(color: Colors.white, fontSize: textSize),
         ),
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
-      minWidth: 150,
+      minWidth: buttonSize,
       elevation: 5.0,
     );
   }
