@@ -139,7 +139,39 @@ class _LostDogCheckState extends State<LostDogCheck> {
                         },
                       );
                     } else {
-                      Navigator.pushNamed(context, HomeScreen.id);
+                      showDialog<void>(
+                        context: context,
+                        barrierDismissible: false, // user must tap button!
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                                'The required details have been recorded.'),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: <Widget>[
+                                  Text(
+                                      'We shall inform you as soon as we get an update!'),
+                                ],
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text(
+                                  'Ok',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: mainColor,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, HomeScreen.id);
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                      // ;
                     }
                   })
             ],

@@ -58,47 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
             <String, dynamic>{}) as Map;
       });
       if (arguments['url'] != null) {
-        String? doc_id = await addToDb(arguments);
-
-        if (arguments['isLost']) {
-          showDialog<void>(
-            context: context,
-            barrierDismissible: false, // user must tap button!
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text('We are sorry to hear that your dog is lost.'),
-                content: SingleChildScrollView(
-                  child: ListBody(
-                    children: <Widget>[
-                      Text(
-                          'Provide us with some details to help you find your dog!'),
-                    ],
-                  ),
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: Text(
-                      'Ok',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: mainColor,
-                      ),
-                    ),
-                    onPressed: () {
-                      print(doc_id);
-                      if (doc_id == null) {
-                        CircularProgressIndicator();
-                      }
-
-                      Navigator.pushNamed(context, LostDogCheck.id,
-                          arguments: {'doc_id': doc_id});
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        }
+        addToDb(arguments);
       }
     });
     getCurrentUser();
@@ -138,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<String?> addToDb(final arguments) async {
+  void addToDb(final arguments) async {
     await _firestore.collection('pets').add({
       "age_months": arguments['months'],
       "age_years": arguments['years'],
@@ -150,10 +110,46 @@ class _HomeScreenState extends State<HomeScreen> {
       'owner_id': userId
     }).then((value) {
       print(value.id);
-      return value.id;
-    }).catchError((error) {
-      return '';
-    });
+      if (arguments['isLost']) {
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('We are sorry to hear that your dog is lost.'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text(
+                        'Provide us with some details to help you find your dog!'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: Text(
+                    'Ok',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: mainColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    // print(doc_id);
+                    // if (doc_id == null) {
+                    //   CircularProgressIndicator();
+                    // }
+
+                    Navigator.pushNamed(context, LostDogCheck.id,
+                        arguments: {'doc_id': value.id});
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }).catchError((error) {});
   }
 
   @override
