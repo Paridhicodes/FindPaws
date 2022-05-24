@@ -4,6 +4,7 @@ import 'package:find_paws_engage/custom_icons_icons.dart';
 import 'package:find_paws_engage/custom_icons_paws_icons.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question2.dart';
 import 'package:find_paws_engage/screens/edit_pages/dog_profile_edit.dart';
+import 'package:find_paws_engage/screens/edit_pages/fetch_location.dart';
 
 import 'package:find_paws_engage/screens/owner_core/home_screen.dart';
 import 'package:find_paws_engage/screens/welcome_screen.dart';
@@ -38,6 +39,9 @@ class _LostDogCheckState extends State<LostDogCheck> {
   int count = 0;
   List iconKeeper = [0, 0, 0];
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
+    print(arguments['doc_id']);
     return Scaffold(
       body: Column(
         children: [
@@ -99,6 +103,8 @@ class _LostDogCheckState extends State<LostDogCheck> {
                         setState(() {
                           iconKeeper[2] = 1;
                         });
+                        Navigator.pushNamed(context, FetchLocation.id,
+                            arguments: {'doc_id': arguments['doc_id']});
                       },
                       child: ListTile(
                         leading: Icon(

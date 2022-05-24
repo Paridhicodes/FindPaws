@@ -302,7 +302,12 @@ class _MyDogsScreenState extends State<MyDogsScreen> {
                                                                 Navigator.pushNamed(
                                                                     context,
                                                                     LostDogCheck
-                                                                        .id);
+                                                                        .id,
+                                                                    arguments: {
+                                                                      'doc_id':
+                                                                          documents[index]
+                                                                              .id
+                                                                    });
                                                               },
                                                             ),
                                                           ],

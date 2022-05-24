@@ -7,6 +7,7 @@ import 'package:find_paws_engage/custom_icons_paws_icons.dart';
 import 'package:find_paws_engage/screens/InitialSetup/UploadImage.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question2.dart';
 import 'package:find_paws_engage/screens/edit_pages/dog_profile_edit.dart';
+import 'package:find_paws_engage/screens/owner_core/LostDogCheck.dart';
 import 'package:find_paws_engage/screens/owner_core/MyDogsScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -51,13 +52,53 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, () {
+    Future.delayed(Duration.zero, () async {
       setState(() {
         arguments = (ModalRoute.of(context)?.settings.arguments ??
             <String, dynamic>{}) as Map;
       });
       if (arguments['url'] != null) {
-        addToDb(arguments);
+        String? doc_id = await addToDb(arguments);
+
+        if (arguments['isLost']) {
+          showDialog<void>(
+            context: context,
+            barrierDismissible: false, // user must tap button!
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('We are sorry to hear that your dog is lost.'),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Text(
+                          'Provide us with some details to help you find your dog!'),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text(
+                      'Ok',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      print(doc_id);
+                      if (doc_id == null) {
+                        CircularProgressIndicator();
+                      }
+
+                      Navigator.pushNamed(context, LostDogCheck.id,
+                          arguments: {'doc_id': doc_id});
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        }
       }
     });
     getCurrentUser();
@@ -97,16 +138,21 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void addToDb(final arguments) {
-    _firestore.collection('pets').add({
+  Future<String?> addToDb(final arguments) async {
+    await _firestore.collection('pets').add({
       "age_months": arguments['months'],
       "age_years": arguments['years'],
       'breed': arguments['breed'],
       'gender': arguments['gender'],
       'image_url': arguments['url'],
-      'lost': arguments['isSafe'],
+      'lost': arguments['isLost'],
       'name': arguments['name'],
       'owner_id': userId
+    }).then((value) {
+      print(value.id);
+      return value.id;
+    }).catchError((error) {
+      return '';
     });
   }
 

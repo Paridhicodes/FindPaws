@@ -45,6 +45,9 @@ dependencies:
   string_extensions: ^0.6.0
   card_swiper : ^2.0.1
   toggle_switch: ^2.0.1
+  location: ^4.4.0
+  google_maps_flutter: ^2.1.5
+  geoflutterfire: ^3.0.3
 
 
 

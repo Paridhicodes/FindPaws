@@ -27,7 +27,7 @@ class Question4 extends StatefulWidget {
 class _Question4State extends State<Question4> {
   bool pressAttention1 = false;
   bool pressAttention2 = false;
-  bool safe = true;
+  bool lost = false;
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
@@ -79,7 +79,7 @@ class _Question4State extends State<Question4> {
                   setState(() {
                     pressAttention1 = !pressAttention1;
                     pressAttention2 = false;
-                    safe = true;
+                    lost = false;
                   });
                 },
                 color: pressAttention1 ? Colors.green : mainColor,
@@ -100,7 +100,7 @@ class _Question4State extends State<Question4> {
                   setState(() {
                     pressAttention2 = !pressAttention2;
                     pressAttention1 = false;
-                    safe = false;
+                    lost = true;
                   });
                 },
                 color: pressAttention2 ? Colors.red : mainColor,
@@ -142,7 +142,7 @@ class _Question4State extends State<Question4> {
                           'gender': arguments['gender'],
                           'years': arguments['years'],
                           'months': arguments['months'],
-                          'isSafe': safe
+                          'isLost': lost
                         });
                 })
           ],
