@@ -7,6 +7,9 @@ import 'package:find_paws_engage/screens/InitialSetup/questions/question3.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question4.dart';
 import 'package:find_paws_engage/screens/edit_pages/dog_profile_edit.dart';
 import 'package:find_paws_engage/screens/edit_pages/fetch_location.dart';
+import 'package:find_paws_engage/screens/finder_screens/FinderChecklist.dart';
+import 'package:find_paws_engage/screens/finder_screens/finder_home.dart';
+import 'package:find_paws_engage/screens/finder_screens/finder_home_upload.dart';
 import 'package:find_paws_engage/screens/login_signup/login_screen.dart';
 import 'package:find_paws_engage/screens/login_signup/signup_screen.dart';
 
@@ -20,9 +23,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:camera/camera.dart';
 
+// List<CameraDescription>? cameras;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // cameras = await availableCameras();
   await Firebase.initializeApp();
   runApp(findPaws());
 }
@@ -58,6 +64,9 @@ class findPaws extends StatelessWidget {
 
         FetchLocation.id: (context) => FetchLocation(),
         LostDogCheck.id: (context) => LostDogCheck(),
+        FinderUpload.id: (context) => FinderUpload(),
+        FinderCheckList.id: (context) => FinderCheckList(),
+        // FinderHome.id: (context) => FinderHome(),
         // DisplayBreed.id: (context) => DisplayBreed(),
       },
     );

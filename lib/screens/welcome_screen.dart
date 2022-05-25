@@ -1,3 +1,5 @@
+import 'package:find_paws_engage/screens/finder_screens/finder_home.dart';
+import 'package:find_paws_engage/screens/finder_screens/finder_home_upload.dart';
 import 'package:flutter/material.dart';
 import 'package:find_paws_engage/constants.dart';
 import 'package:find_paws_engage/components/AppButton.dart';
@@ -62,7 +64,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 AppButton(
                   buttonText: "I've found a lost pet",
                   onPressed: () {
-                    print("Found");
+                    Navigator.pushNamed(context, FinderUpload.id);
                   },
                 ),
                 const SizedBox(

@@ -34,7 +34,7 @@ dependencies:
   firebase_auth: ^3.3.17
   cloud_firestore: ^3.1.14
   country_code_picker: ^2.0.2
-  image_picker: ^0.8.5+1
+  image_picker: ^0.8.5+3
   step_progress_indicator: ^1.0.2
   dropdown_button2: ^1.0.0
   firebase_storage: ^10.2.16
@@ -48,6 +48,7 @@ dependencies:
   location: ^4.4.0
   google_maps_flutter: ^2.1.5
   geoflutterfire: ^3.0.3
+  camera: ^0.9.7
 
 
 

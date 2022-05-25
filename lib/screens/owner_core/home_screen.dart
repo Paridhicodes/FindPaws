@@ -7,6 +7,7 @@ import 'package:find_paws_engage/custom_icons_paws_icons.dart';
 import 'package:find_paws_engage/screens/InitialSetup/UploadImage.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question2.dart';
 import 'package:find_paws_engage/screens/edit_pages/dog_profile_edit.dart';
+import 'package:find_paws_engage/screens/finder_screens/finder_home_upload.dart';
 import 'package:find_paws_engage/screens/owner_core/LostDogCheck.dart';
 import 'package:find_paws_engage/screens/owner_core/MyDogsScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -159,7 +160,9 @@ class _HomeScreenState extends State<HomeScreen> {
         imageLink: 'images/card7.jpg',
         mainText: 'Found a dog',
         subText: 'If you found a dog, help us find it\'s owner.',
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, FinderUpload.id);
+        },
         buttonText: 'Scan',
       ),
       CardLayout(

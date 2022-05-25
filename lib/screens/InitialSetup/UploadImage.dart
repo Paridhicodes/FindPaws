@@ -156,6 +156,7 @@ class _UploadImageState extends State<UploadImage> {
                             buttonText: 'Next',
                             onPressed: () async {
                               // checkBreed();
+                              print(imagePath);
                               GetBreed _getBreed =
                                   GetBreed(imageLink: imagePath);
                               List list = await _getBreed.initialFunc();

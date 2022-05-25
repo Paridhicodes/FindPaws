@@ -4,6 +4,8 @@
         android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission
         android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
    <application android:requestLegacyExternalStorage="true"
        android:label="find_paws_engage"
         android:icon="@mipmap/ic_launcher">
