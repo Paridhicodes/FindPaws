@@ -125,55 +125,56 @@ class _LostDogCheckState extends State<LostDogCheck> {
                 ),
               ),
               RoundedButton(
-                  buttonText: 'Done',
-                  onPressed: () {
-                    if (count < 3) {
-                      showDialog<void>(
-                        context: context,
-                        barrierDismissible: false, // user must tap button!
-                        builder: (BuildContext context) {
-                          return AlertBox(
-                            titleText: 'Tick all the tasks!',
-                            bodyText: '',
-                          );
-                        },
-                      );
-                    } else {
-                      showDialog<void>(
-                        context: context,
-                        barrierDismissible: false, // user must tap button!
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text(
-                                'The required details have been recorded.'),
-                            content: SingleChildScrollView(
-                              child: ListBody(
-                                children: <Widget>[
-                                  Text(
-                                      'We shall inform you as soon as we get an update!'),
-                                ],
-                              ),
+                buttonText: 'Done',
+                onPressed: () {
+                  if (count < 3) {
+                    showDialog<void>(
+                      context: context,
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return AlertBox(
+                          titleText: 'Tick all the tasks!',
+                          bodyText: '',
+                        );
+                      },
+                    );
+                  } else {
+                    showDialog<void>(
+                      context: context,
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title:
+                              Text('The required details have been recorded.'),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: <Widget>[
+                                Text(
+                                    'We shall inform you as soon as we get an update!'),
+                              ],
                             ),
-                            actions: <Widget>[
-                              TextButton(
-                                child: Text(
-                                  'Ok',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: mainColor,
-                                  ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text(
+                                'Ok',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: mainColor,
                                 ),
-                                onPressed: () {
-                                  Navigator.pushNamed(context, HomeScreen.id);
-                                },
                               ),
-                            ],
-                          );
-                        },
-                      );
-                      // ;
-                    }
-                  })
+                              onPressed: () {
+                                Navigator.pushNamed(context, HomeScreen.id);
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    // ;
+                  }
+                },
+              )
             ],
           )
         ],

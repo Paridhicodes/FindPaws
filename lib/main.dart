@@ -8,6 +8,7 @@ import 'package:find_paws_engage/screens/InitialSetup/questions/question4.dart';
 import 'package:find_paws_engage/screens/edit_pages/dog_profile_edit.dart';
 import 'package:find_paws_engage/screens/edit_pages/fetch_location.dart';
 import 'package:find_paws_engage/screens/finder_screens/FinderChecklist.dart';
+import 'package:find_paws_engage/screens/finder_screens/FinderDetails.dart';
 import 'package:find_paws_engage/screens/finder_screens/finder_home.dart';
 import 'package:find_paws_engage/screens/finder_screens/finder_home_upload.dart';
 import 'package:find_paws_engage/screens/login_signup/login_screen.dart';
@@ -66,6 +67,7 @@ class findPaws extends StatelessWidget {
         LostDogCheck.id: (context) => LostDogCheck(),
         FinderUpload.id: (context) => FinderUpload(),
         FinderCheckList.id: (context) => FinderCheckList(),
+        FinderDetails.id: (context) => FinderDetails(),
         // FinderHome.id: (context) => FinderHome(),
         // DisplayBreed.id: (context) => DisplayBreed(),
       },

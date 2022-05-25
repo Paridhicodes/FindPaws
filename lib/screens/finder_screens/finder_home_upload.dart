@@ -198,7 +198,8 @@ class _FinderUploadState extends State<FinderUpload> {
                                       ),
                                       onPressed: () {
                                         Navigator.pushNamed(
-                                            context, FinderUpload.id);
+                                            context, FinderUpload.id,
+                                            arguments: {list: 'list'});
                                         ;
                                       },
                                     ),

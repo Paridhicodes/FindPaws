@@ -152,7 +152,7 @@ class _DisplayBreedState extends State<DisplayBreed> {
   }
 
   Widget getButtons(List<dynamic> list) {
-    print(list);
+    // print(list);
     List<Widget> ls = [];
     for (var x in list) {
       String breed = x['label'].toString().toTitleCase!;
