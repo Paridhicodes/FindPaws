@@ -73,7 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
         setState(() {
           loggedInUser = user;
           userId = user.uid;
-          // print(userId);
         });
       }
     } catch (e) {

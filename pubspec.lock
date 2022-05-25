@@ -365,7 +365,7 @@ packages:
       name: google_maps_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.5"
+    version: "2.1.6"
   google_maps_flutter_platform_interface:
     dependency: transitive
     description:
@@ -520,6 +520,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  modal_progress_hud_nsn:
+    dependency: "direct main"
+    description:
+      name: modal_progress_hud_nsn
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0-nullsafety-1"
   node_preamble:
     dependency: transitive
     description:

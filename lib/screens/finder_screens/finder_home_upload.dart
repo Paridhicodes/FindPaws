@@ -36,6 +36,8 @@ class FinderUpload extends StatefulWidget {
 
 class _FinderUploadState extends State<FinderUpload> {
   var imageFile;
+  String downurl = '';
+  Storage storage = Storage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -198,8 +200,9 @@ class _FinderUploadState extends State<FinderUpload> {
                                       ),
                                       onPressed: () {
                                         Navigator.pushNamed(
-                                            context, FinderUpload.id,
-                                            arguments: {list: 'list'});
+                                          context,
+                                          FinderUpload.id,
+                                        );
                                         ;
                                       },
                                     ),
@@ -208,9 +211,13 @@ class _FinderUploadState extends State<FinderUpload> {
                               },
                             );
                           } else if (!list.isEmpty) {
+                            await storage.uploadFile(
+                                imageFile.path, 'finder_image');
+                            downurl = await storage.downloadUrl('finder_image');
+                            print(downurl);
                             print(list);
                             Navigator.pushNamed(context, FinderCheckList.id,
-                                arguments: {'list': list});
+                                arguments: {'list': list, 'url': downurl});
                           } else {
                             showDialog<void>(
                               context: context,

@@ -110,7 +110,6 @@ class _FinderCheckListState extends State<FinderCheckList> {
                         setState(() {});
                         Future<Position?> newPos = determinePosition();
                         if (_currlat == 0 && _currlong == 0) {
-                          print('entered');
                           Center(child: CircularProgressIndicator());
                         }
                         setState(() {
@@ -170,6 +169,8 @@ class _FinderCheckListState extends State<FinderCheckList> {
                                 arguments: {
                                   'lat': _currlat,
                                   'long': _currlong,
+                                  'url': arguments['url'],
+                                  'list': arguments['list'],
                                 });
                           }
                         },
