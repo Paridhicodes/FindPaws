@@ -58,8 +58,7 @@ class _FetchLocationState extends State<FetchLocation> {
         target: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
         zoom: 12.0,
       )));
-      print(loc.latitude);
-      print(loc.longitude);
+
       if (!mounted) return;
       setState(() {
         _markers.add(Marker(
@@ -75,7 +74,7 @@ class _FetchLocationState extends State<FetchLocation> {
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
-    print(arguments['doc_id']);
+    // print(arguments['doc_id']);
     return Scaffold(
       body: Column(
         children: [

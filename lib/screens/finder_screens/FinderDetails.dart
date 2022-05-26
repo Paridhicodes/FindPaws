@@ -29,6 +29,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:string_extensions/string_extensions.dart';
 
 class FinderDetails extends StatefulWidget {
   static const String id = "finder_details";
@@ -44,16 +46,18 @@ class _FinderDetailsState extends State<FinderDetails> {
   late String phoneNumber;
   bool showSpinner = false;
   CountryCode countryCode = CountryCode(name: "IN", dialCode: '+91');
-
+  final geo = Geoflutterfire();
   final _firestore = FirebaseFirestore.instance;
+  List owners = [];
+  bool updated = false;
 
   @override
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
-    print(arguments);
-    print(arguments['lat']);
-    print(arguments['long']);
+    // print(arguments);
+    // print(arguments['lat']);
+    // print(arguments['long']);
     return Scaffold(
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
@@ -177,23 +181,26 @@ class _FinderDetailsState extends State<FinderDetails> {
                         },
                       );
                     } else {
-                      OwnerList _owners = OwnerList(
-                        latitude: arguments['lat'],
-                        longitude: arguments['long'],
-                        list: arguments['list'],
-                      );
-                      List ownersList = _owners.initialFunc();
-                      print(ownersList);
-
-                      Navigator.pushNamed(context, FoundOwners.id, arguments: {
-                        'lat': arguments['lat'],
-                        'long': arguments['long'],
-                        'url': arguments['url'],
-                        'list': arguments['list'],
-                        'finder_name': name,
-                        'finder_email': email,
-                        'finder_phone': phoneNumber,
-                      });
+                      fetchRecords(arguments['lat'], arguments['long'],
+                          arguments['list']);
+                      if (!updated) {
+                        const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (updated) {
+                        Navigator.pushNamed(context, FoundOwners.id,
+                            arguments: {
+                              'lat': arguments['lat'],
+                              'long': arguments['long'],
+                              'url': arguments['url'],
+                              'list': arguments['list'],
+                              'finder_name': name,
+                              'finder_email': email,
+                              'finder_phone': phoneNumber,
+                              'owner_list': owners,
+                            });
+                      }
                     }
                   },
                 ),
@@ -203,5 +210,43 @@ class _FinderDetailsState extends State<FinderDetails> {
         ),
       ),
     );
+  }
+
+  void fetchRecords(double lat, double long, List list) {
+    List tempowners = [];
+    List breedList = [];
+
+    for (var i = 0; i < list.length; i++) {
+      String? str = list[i]['label'].toString().toTitleCase;
+      breedList.add(str);
+    }
+
+    GeoFirePoint center = geo.point(latitude: lat, longitude: long);
+    _firestore.collection("pets").where('breed', whereIn: breedList).get().then(
+          (res) => {},
+          onError: (e) => print("Error completing: $e"),
+        );
+    var queryRef = _firestore
+        .collection('pets')
+        .where('lost', isEqualTo: true)
+        .where('breed', whereIn: breedList);
+
+    Stream<List<DocumentSnapshot>> stream = geo
+        .collection(collectionRef: queryRef)
+        .within(center: center, radius: 50, field: 'point');
+
+    stream.listen((List<DocumentSnapshot> documentList) async {
+      final response = await documentList;
+      documentList.forEach((DocumentSnapshot document) {
+        tempowners.add(document);
+      });
+      // for (int i = 0; i < owners.length; i++) {
+      //   // tempowners.add(owners[i].data()['name']);
+      // }
+      setState(() {
+        owners = tempowners;
+        updated = true;
+      });
+    });
   }
 }

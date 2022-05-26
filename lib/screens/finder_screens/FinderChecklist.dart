@@ -107,14 +107,13 @@ class _FinderCheckListState extends State<FinderCheckList> {
                     ),
                     TextButton(
                       onPressed: () {
-                        setState(() {});
-                        Future<Position?> newPos = determinePosition();
-                        if (_currlat == 0 && _currlong == 0) {
-                          Center(child: CircularProgressIndicator());
-                        }
                         setState(() {
                           loc = true;
                         });
+                        Future<Position?> newPos = determinePosition();
+                        if (_currlat == 0 && _currlong == 0) {
+                          const Center(child: CircularProgressIndicator());
+                        }
                       },
                       child: ListTile(
                         leading: Icon(
@@ -207,31 +206,7 @@ class _FinderCheckListState extends State<FinderCheckList> {
     );
   }
 
-  // _getCurrentLocation() {
-  //   Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
-  //       .then((Position position) {
-  //     setState(() {
-  //       _currlat = position.latitude;
-  //       _currlong = position.longitude;
-  //     });
-  //     print(position);
-  //   }).catchError((e) {
-  //     print(e);
-  //   });
-  // }
-
   Future<Position?> determinePosition() async {
-    // LocationPermission permission;
-    // permission = await Geolocator.checkPermission();
-    // if (permission == LocationPermission.denied) {
-    //   permission = await Geolocator.requestPermission();
-    //   if (permission == LocationPermission.deniedForever) {
-    //     return Future.error('Location Not Available');
-    //   }
-    // } else {
-    //   throw Exception('Error');
-    // }
-    // await _getCurrentLocation();
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -243,11 +218,7 @@ class _FinderCheckListState extends State<FinderCheckList> {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         Get.snackbar('', 'Location Permission Denied');
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
+
         return Future.error('Location permissions are denied');
       }
     }
