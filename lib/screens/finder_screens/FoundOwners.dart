@@ -154,7 +154,7 @@ class _FoundOwnersState extends State<FoundOwners> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   ClipRRect(
@@ -194,7 +194,7 @@ class _FoundOwnersState extends State<FoundOwners> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   OutlinedButton(
@@ -246,6 +246,7 @@ class _FoundOwnersState extends State<FoundOwners> {
                         },
                         onError: (e) => print("Error getting document: $e"),
                       );
+
                       sendEmail(
                         toEmail: ownerMail,
                         dogName: documentList[i]['name'],
@@ -255,10 +256,9 @@ class _FoundOwnersState extends State<FoundOwners> {
                         finderPhone: arguments['finder_phone'],
                         imageURL: arguments['url'],
                       );
-                      // }
                     },
                     style: OutlinedButton.styleFrom(
-                      side: BorderSide(
+                      side: const BorderSide(
                         color: Color(0xff88c0b5),
                       ),
                     ),
@@ -314,7 +314,7 @@ class _FoundOwnersState extends State<FoundOwners> {
           'finder_name': finderName,
           'finder_email': finderEmail,
           'finder_phone': finderPhone,
-          'image-url': imageURL,
+          'image_url': imageURL,
         }
       }),
     );
