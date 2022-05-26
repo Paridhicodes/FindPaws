@@ -19,6 +19,7 @@ import 'package:find_paws_engage/screens/owner_core/LostDogCheck.dart';
 import 'package:find_paws_engage/screens/owner_core/MyDogsScreen.dart';
 import 'package:find_paws_engage/screens/owner_core/about_us.dart';
 import 'package:find_paws_engage/screens/owner_core/home_screen.dart';
+import 'package:find_paws_engage/screens/owner_core/near_me.dart';
 import 'package:find_paws_engage/screens/splash_screen.dart';
 import 'package:find_paws_engage/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,7 @@ class findPaws extends StatelessWidget {
         FinderDetails.id: (context) => FinderDetails(),
         FoundOwners.id: (context) => FoundOwners(),
         AboutUs.id: (context) => AboutUs(),
+        NearMe.id: (context) => NearMe(),
         // FinderHome.id: (context) => FinderHome(),
         // DisplayBreed.id: (context) => DisplayBreed(),
       },

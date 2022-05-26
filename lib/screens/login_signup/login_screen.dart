@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:find_paws_engage/constants.dart';
 import 'package:find_paws_engage/components/RoundedButton.dart';
 
+import '../../components/AlertBox.dart';
+
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";
   const LoginScreen({Key? key}) : super(key: key);
@@ -130,7 +132,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushNamed(context, UploadImage.id);
                     }
                   } catch (e) {
-                    print(e);
+                    showDialog<void>(
+                      context: context,
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return AlertBox(
+                          titleText: 'The email or password is incorrect.',
+                          bodyText: '',
+                          finalText: 'Retry',
+                        );
+                      },
+                    );
                   }
                 },
               ),

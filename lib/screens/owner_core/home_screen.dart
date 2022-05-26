@@ -32,6 +32,8 @@ import '../login_signup/login_screen.dart';
 import '../welcome_screen.dart';
 import 'package:min_id/min_id.dart';
 
+import 'near_me.dart';
+
 class HomeScreen extends StatefulWidget {
   static const String id = "home_screen";
   const HomeScreen({Key? key}) : super(key: key);
@@ -436,7 +438,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   currentScreen = HomeScreen();
                                   currentTab = 0;
                                 });
-                                Navigator.pushNamed(context, MyDogsScreen.id);
+                                Navigator.pushNamed(context, NearMe.id);
                               },
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,

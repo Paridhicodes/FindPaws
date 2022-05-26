@@ -7,6 +7,8 @@ import 'package:find_paws_engage/components/RoundedButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../components/AlertBox.dart';
+
 class RegisterScreen extends StatefulWidget {
   static const String id = "register_screen";
   const RegisterScreen({Key? key}) : super(key: key);
@@ -232,7 +234,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Navigator.pushNamed(context, UploadImage.id);
                     }
                   } catch (e) {
-                    print(e);
+                    showDialog<void>(
+                      context: context,
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return AlertBox(
+                          titleText: 'Please check the following:',
+                          bodyText:
+                              '• Your name must have at least one character. \n\n• Enter a valid email address. \n\n• Enter a valid phone number. \n\n• Your password must have at least 6 characters.',
+                          finalText: 'Retry',
+                        );
+                      },
+                    );
                   }
                 },
               ),

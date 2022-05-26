@@ -240,9 +240,7 @@ class _FinderDetailsState extends State<FinderDetails> {
       documentList.forEach((DocumentSnapshot document) {
         tempowners.add(document);
       });
-      // for (int i = 0; i < owners.length; i++) {
-      //   // tempowners.add(owners[i].data()['name']);
-      // }
+
       setState(() {
         owners = tempowners;
         updated = true;

@@ -27,6 +27,7 @@ class FoundOwners extends StatefulWidget {
 
 class _FoundOwnersState extends State<FoundOwners> {
   bool permissionTaken = false;
+  bool allowed = false;
   final _firestore = FirebaseFirestore.instance;
 
   @override
@@ -207,55 +208,66 @@ class _FoundOwnersState extends State<FoundOwners> {
                             context: context,
                             barrierDismissible: false, // user must tap button!
                             builder: (BuildContext context) {
-                              return AlertBox(
-                                titleText: 'Sharing of Details ',
-                                bodyText:
-                                    'Please confirm that you agree to share your contact details with the potential pet owner and the findPaws team.',
-                                finalText: 'Yes',
+                              return AlertDialog(
+                                title: Text('Sharing of Details '),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: <Widget>[
+                                      Text(
+                                          'Please confirm that you agree to share your contact details with the potential pet owner and the findPaws team.'),
+                                    ],
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text(
+                                      'Yes',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: mainColor,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        allowed = true;
+                                      });
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
                               );
                             });
                       }
-                      // print(counter[i]);
-                      // if (counter[i] == 0) {
-                      //   showDialog<void>(
-                      //       context: context,
-                      //       barrierDismissible: false, // user must tap button!
-                      //       builder: (BuildContext context) {
-                      //         return AlertBox(
-                      //           titleText: 'Mail already sent!',
-                      //           bodyText: '',
-                      //           finalText: 'Ok',
-                      //         );
-                      //       });
-                      // } else {
-                      String ownerName = '';
-                      String ownerMail = '';
+                      if (allowed) {
+                        String ownerName = '';
+                        String ownerMail = '';
 
-                      var docRef = _firestore
-                          .collection('details')
-                          .doc(documentList[i]['owner_id']);
-                      await docRef.get().then(
-                        (DocumentSnapshot doc) {
-                          final data = doc.data() as Map<String, dynamic>;
-                          String tempownerName = data['Name'];
-                          String tempownerMail = data['Email'];
-                          setState(() {
-                            ownerName = tempownerName;
-                            ownerMail = tempownerMail;
-                          });
-                        },
-                        onError: (e) => print("Error getting document: $e"),
-                      );
+                        var docRef = _firestore
+                            .collection('details')
+                            .doc(documentList[i]['owner_id']);
+                        await docRef.get().then(
+                          (DocumentSnapshot doc) {
+                            final data = doc.data() as Map<String, dynamic>;
+                            String tempownerName = data['Name'];
+                            String tempownerMail = data['Email'];
+                            setState(() {
+                              ownerName = tempownerName;
+                              ownerMail = tempownerMail;
+                            });
+                          },
+                          onError: (e) => print("Error getting document: $e"),
+                        );
 
-                      sendEmail(
-                        toEmail: ownerMail,
-                        dogName: documentList[i]['name'],
-                        ownerName: ownerName,
-                        finderName: arguments['finder_name'],
-                        finderEmail: arguments['finder_email'],
-                        finderPhone: arguments['finder_phone'],
-                        imageURL: arguments['url'],
-                      );
+                        sendEmail(
+                          toEmail: ownerMail,
+                          dogName: documentList[i]['name'],
+                          ownerName: ownerName,
+                          finderName: arguments['finder_name'],
+                          finderEmail: arguments['finder_email'],
+                          finderPhone: arguments['finder_phone'],
+                          imageURL: arguments['url'],
+                        );
+                      }
                     },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(
