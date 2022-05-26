@@ -3,7 +3,6 @@ import 'package:find_paws_engage/get_breed.dart';
 import 'package:find_paws_engage/get_dog_cat.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/display_breed.dart';
 import 'package:find_paws_engage/screens/finder_screens/FoundOwners.dart';
-import 'package:find_paws_engage/screens/finder_screens/owner_finder_backend.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question1.dart';
 import 'package:find_paws_engage/screens/owner_core/home_screen.dart';
