@@ -54,9 +54,7 @@ class _FinderDetailsState extends State<FinderDetails> {
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
-    // print(arguments);
-    // print(arguments['lat']);
-    // print(arguments['long']);
+
     return Scaffold(
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
@@ -183,8 +181,16 @@ class _FinderDetailsState extends State<FinderDetails> {
                       fetchRecords(arguments['lat'], arguments['long'],
                           arguments['list']);
                       if (!updated) {
-                        const Center(
-                          child: CircularProgressIndicator(),
+                        showDialog<void>(
+                          context: context,
+                          barrierDismissible: false, // user must tap button!
+                          builder: (BuildContext context) {
+                            return AlertBox(
+                              titleText: 'Fetching potential owner details...',
+                              bodyText:
+                                  'Please wait while we search for the possible owners near you.',
+                            );
+                          },
                         );
                       }
                       if (updated) {

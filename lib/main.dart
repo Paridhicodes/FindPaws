@@ -10,7 +10,7 @@ import 'package:find_paws_engage/screens/edit_pages/fetch_location.dart';
 import 'package:find_paws_engage/screens/finder_screens/FinderChecklist.dart';
 import 'package:find_paws_engage/screens/finder_screens/FinderDetails.dart';
 import 'package:find_paws_engage/screens/finder_screens/FoundOwners.dart';
-import 'package:find_paws_engage/screens/finder_screens/finder_home.dart';
+
 import 'package:find_paws_engage/screens/finder_screens/finder_home_upload.dart';
 import 'package:find_paws_engage/screens/login_signup/login_screen.dart';
 import 'package:find_paws_engage/screens/login_signup/signup_screen.dart';

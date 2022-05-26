@@ -61,10 +61,14 @@ class _MyDogsScreenState extends State<MyDogsScreen> {
                 builder: (context, futureSnapshot) {
                   if (futureSnapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return const Center(
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height / 1.3,
+                      child: const Center(
                         child: CircularProgressIndicator(
-                      color: mainColor,
-                    ));
+                          color: mainColor,
+                        ),
+                      ),
+                    );
                   }
                   print(futureSnapshot.data);
                   return StreamBuilder<QuerySnapshot>(

@@ -1,4 +1,3 @@
-import 'package:find_paws_engage/screens/finder_screens/finder_home.dart';
 import 'package:find_paws_engage/screens/finder_screens/finder_home_upload.dart';
 import 'package:flutter/material.dart';
 import 'package:find_paws_engage/constants.dart';
