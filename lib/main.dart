@@ -17,6 +17,7 @@ import 'package:find_paws_engage/screens/login_signup/signup_screen.dart';
 
 import 'package:find_paws_engage/screens/owner_core/LostDogCheck.dart';
 import 'package:find_paws_engage/screens/owner_core/MyDogsScreen.dart';
+import 'package:find_paws_engage/screens/owner_core/about_us.dart';
 import 'package:find_paws_engage/screens/owner_core/home_screen.dart';
 import 'package:find_paws_engage/screens/splash_screen.dart';
 import 'package:find_paws_engage/screens/welcome_screen.dart';
@@ -70,6 +71,7 @@ class findPaws extends StatelessWidget {
         FinderCheckList.id: (context) => FinderCheckList(),
         FinderDetails.id: (context) => FinderDetails(),
         FoundOwners.id: (context) => FoundOwners(),
+        AboutUs.id: (context) => AboutUs(),
         // FinderHome.id: (context) => FinderHome(),
         // DisplayBreed.id: (context) => DisplayBreed(),
       },

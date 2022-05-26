@@ -61,7 +61,10 @@ class _MyDogsScreenState extends State<MyDogsScreen> {
                 builder: (context, futureSnapshot) {
                   if (futureSnapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return const Center(
+                        child: CircularProgressIndicator(
+                      color: mainColor,
+                    ));
                   }
                   print(futureSnapshot.data);
                   return StreamBuilder<QuerySnapshot>(
@@ -121,7 +124,7 @@ class _MyDogsScreenState extends State<MyDogsScreen> {
                                                             content:
                                                                 SingleChildScrollView(
                                                               child: ListBody(
-                                                                children: <
+                                                                children: const <
                                                                     Widget>[
                                                                   Text(
                                                                       'Once deleted, you will not be able to retrieve it.'),
@@ -130,7 +133,8 @@ class _MyDogsScreenState extends State<MyDogsScreen> {
                                                             ),
                                                             actions: <Widget>[
                                                               TextButton(
-                                                                child: Text(
+                                                                child:
+                                                                    const Text(
                                                                   'Delete',
                                                                   style:
                                                                       TextStyle(

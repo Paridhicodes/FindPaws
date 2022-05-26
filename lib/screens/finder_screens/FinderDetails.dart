@@ -44,10 +44,9 @@ class _FinderDetailsState extends State<FinderDetails> {
   late String phoneNumber;
   bool showSpinner = false;
   CountryCode countryCode = CountryCode(name: "IN", dialCode: '+91');
-  final _auth = FirebaseAuth.instance;
+
   final _firestore = FirebaseFirestore.instance;
-  late User loggedInUser;
-  late String userId;
+
   @override
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
@@ -62,10 +61,10 @@ class _FinderDetailsState extends State<FinderDetails> {
           child: Column(
             children: [
               AppBarInit(),
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(20.0),
                   child: Text(
                     "Contact details",
                     style: TextStyle(
@@ -162,9 +161,6 @@ class _FinderDetailsState extends State<FinderDetails> {
                 child: RoundedButton(
                   buttonText: 'Find',
                   onPressed: () async {
-                    // setState(() {
-                    //   showSpinner = true;
-                    // });
                     bool emailValid = RegExp(
                             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                         .hasMatch(email);
@@ -180,19 +176,15 @@ class _FinderDetailsState extends State<FinderDetails> {
                           );
                         },
                       );
-                      setState(() {
-                        showSpinner = false;
-                      });
                     } else {
-                      // getCurrentUser();
                       OwnerList _owners = OwnerList(
                         latitude: arguments['lat'],
                         longitude: arguments['long'],
                         list: arguments['list'],
                       );
-                      _owners.fetchRecords();
-                      //   loggedInUser: loggedInUser,
-                      // userId: userId
+                      List ownersList = _owners.initialFunc();
+                      print(ownersList);
+
                       Navigator.pushNamed(context, FoundOwners.id, arguments: {
                         'lat': arguments['lat'],
                         'long': arguments['long'],
@@ -201,9 +193,6 @@ class _FinderDetailsState extends State<FinderDetails> {
                         'finder_name': name,
                         'finder_email': email,
                         'finder_phone': phoneNumber,
-                      });
-                      setState(() {
-                        showSpinner = false;
                       });
                     }
                   },
@@ -214,21 +203,5 @@ class _FinderDetailsState extends State<FinderDetails> {
         ),
       ),
     );
-  }
-
-  getCurrentUser() {
-    try {
-      final user = _auth.currentUser;
-      print(user);
-      if (user != null) {
-        setState(() {
-          userId = user.uid;
-          loggedInUser = user;
-        });
-      }
-    } catch (e) {
-      print(e);
-      Navigator.pop(context);
-    }
   }
 }

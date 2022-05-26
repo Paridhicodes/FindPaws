@@ -10,6 +10,7 @@ import 'package:find_paws_engage/screens/edit_pages/dog_profile_edit.dart';
 import 'package:find_paws_engage/screens/finder_screens/finder_home_upload.dart';
 import 'package:find_paws_engage/screens/owner_core/LostDogCheck.dart';
 import 'package:find_paws_engage/screens/owner_core/MyDogsScreen.dart';
+import 'package:find_paws_engage/screens/owner_core/about_us.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:find_paws_engage/constants.dart';
@@ -25,9 +26,11 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:find_paws_engage/components/AlertBox.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:find_paws_engage/components/CardLayout.dart';
-
+import 'package:flutter/services.dart';
+import '../../info_icons.dart';
 import '../login_signup/login_screen.dart';
 import '../welcome_screen.dart';
+import 'package:min_id/min_id.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = "home_screen";
@@ -166,248 +169,431 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       CardLayout(
         imageLink: 'images/card8.jpg',
-        mainText: 'Update information',
-        subText: 'You can update the information about your dog here!',
+        mainText: 'My dog family',
+        subText:
+            'You can view and update the information about your dogs here!',
         onPressed: () {
-          Navigator.pushNamed(context, DogProfileEdit.id);
+          Navigator.pushNamed(context, MyDogsScreen.id);
         },
-        buttonText: 'Update',
+        buttonText: 'View',
       ),
       CardLayout(
         imageLink: 'images/card9.jpg',
         mainText: 'Invite your friends',
         subText: 'You can invite your friends to join the Find Paws community.',
         onPressed: () {
-          print('3');
+          final id = MinId.getId();
+
+          showDialog<void>(
+            context: context,
+            barrierDismissible: false, // user must tap button!
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Your Invite Code'),
+                actions: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: UnconstrainedBox(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: Text(
+                                    '$id',
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                ), // <-- Text
+                                SizedBox(
+                                  width: 87,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    print('Tapped');
+                                  },
+                                  child: InkWell(
+                                    child: Icon(
+                                      // <-- Icon
+                                      Icons.copy,
+                                      size: 15.0,
+                                    ),
+                                    onTap: () {
+                                      Clipboard.setData(
+                                              new ClipboardData(text: "$id"))
+                                          .then((_) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    'Code copied successfully !')));
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color(0xFFD0D0D0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    child: const Text(
+                      'Done',
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+            },
+          );
         },
         buttonText: 'Invite',
       ),
     ];
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height / 2,
-              decoration: BoxDecoration(
-                color: mainColor,
+
+    return WillPopScope(
+      onWillPop: () {
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Do you really want to exit?'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: const <Widget>[
+                    Text(''),
+                  ],
+                ),
               ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
-                  child: TextButton(
-                      child: Icon(
-                        Icons.logout,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        logout();
-                      }),
-                )
+              actions: <Widget>[
+                TextButton(
+                  child: const Text(
+                    'Yes',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: mainColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, WelcomeScreen.id);
+                  },
+                ),
+                TextButton(
+                  child: const Text(
+                    'No',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: mainColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ],
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
-              child: Column(
+            );
+            ;
+          },
+        );
+        return Future<bool>.value(true);
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height / 2,
+                decoration: BoxDecoration(
+                  color: mainColor,
+                ),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Hello, $userName !',
-                        style: TextStyle(
-                            fontSize: 35, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      'Welcome to your very own pet corner, where you can manage all your doggies and update everything! Happy Pawesome!',
-                      style: TextStyle(
-                        fontSize: 19,
-                      ),
-                    ),
-                  ),
+                    padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
+                    child: TextButton(
+                        child: Icon(
+                          Icons.logout,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          logout();
+                        }),
+                  )
                 ],
               ),
-            ),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
-                child: SizedBox(
-                  height: 390,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 3,
-                    padding: EdgeInsets.all(12.0),
-                    itemBuilder: (context, index) {
-                      return buildCard(index);
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(width: 12);
-                    },
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Hello, $userName !',
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Welcome to your very own pet corner, where you can manage all your doggies and update everything! Happy Pawesome!',
+                        style: TextStyle(
+                          fontSize: 19,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+                  child: SizedBox(
+                    height: 390,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                      padding: EdgeInsets.all(12.0),
+                      itemBuilder: (context, index) {
+                        return buildCard(index);
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(width: 12);
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: BottomAppBar(
-                clipBehavior: Clip.none,
-                color: mainColor,
-                shape: CircularNotchedRectangle(),
-                notchMargin: 10,
-                child: Container(
-                  height: 60,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          MaterialButton(
-                            minWidth: 40,
-                            onPressed: () {
-                              setState(() {
-                                currentScreen = HomeScreen();
-                                currentTab = 0;
-                              });
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: BottomAppBar(
+                  clipBehavior: Clip.none,
+                  color: mainColor,
+                  shape: CircularNotchedRectangle(),
+                  notchMargin: 10,
+                  child: Container(
+                    height: 60,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            MaterialButton(
+                              minWidth: 40,
+                              onPressed: () {
+                                setState(() {
+                                  currentScreen = HomeScreen();
+                                  currentTab = 0;
+                                });
 
-                              Navigator.pushNamed(context, UploadImage.id);
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                                Text(
-                                  'Add Dog',
-                                  style: TextStyle(
+                                Navigator.pushNamed(context, UploadImage.id);
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(
+                                    CustomIcons.dog,
                                     color: Colors.white,
-                                    fontSize: 12,
+                                    size: 20,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    'Add Dog',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          MaterialButton(
-                            minWidth: 40,
-                            onPressed: () {
-                              setState(() {
-                                currentScreen = HomeScreen();
-                                currentTab = 0;
-                              });
-                              Navigator.pushNamed(context, MyDogsScreen.id);
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  CustomIcons.dog,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                                Text(
-                                  'My Dogs',
-                                  style: TextStyle(
+                            MaterialButton(
+                              minWidth: 40,
+                              onPressed: () {
+                                setState(() {
+                                  currentScreen = HomeScreen();
+                                  currentTab = 0;
+                                });
+                                Navigator.pushNamed(context, MyDogsScreen.id);
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(
+                                    CustomIconsPaws.paw,
                                     color: Colors.white,
-                                    fontSize: 12,
+                                    size: 20,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    'Near me',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          MaterialButton(
-                            minWidth: 40,
-                            onPressed: () {
-                              setState(() {
-                                currentScreen = HomeScreen();
-                                currentTab = 0;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  CustomIconsPaws.paw,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                                Text(
-                                  'Near Me',
-                                  style: TextStyle(
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            MaterialButton(
+                              minWidth: 40,
+                              onPressed: () {
+                                setState(() {
+                                  currentScreen = HomeScreen();
+                                  currentTab = 0;
+                                });
+                                Navigator.pushNamed(context, AboutUs.id);
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(
+                                    Info.info_circled,
                                     color: Colors.white,
-                                    fontSize: 12,
+                                    size: 20,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    'About Us',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          MaterialButton(
-                            minWidth: 40,
-                            onPressed: () {
-                              setState(() {
-                                currentScreen = HomeScreen();
-                                currentTab = 0;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.person,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                                Text(
-                                  'My Profile',
-                                  style: TextStyle(
+                            MaterialButton(
+                              minWidth: 40,
+                              onPressed: () {
+                                setState(() {
+                                  currentScreen = HomeScreen();
+                                  currentTab = 0;
+                                });
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(
+                                    Icons.person,
                                     color: Colors.white,
-                                    fontSize: 12,
+                                    size: 20,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    'My Profile',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-                child: SizedBox(
-                  width: 68,
-                  height: 68,
-                  child: FloatingActionButton(
-                    clipBehavior: Clip.none,
-                    onPressed: () {},
-                    backgroundColor: Color(0xff88c0b5),
-                    child: Image.asset('images/splashscreenimage.png',
-                        width: 120, height: 120),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                  child: SizedBox(
+                    width: 68,
+                    height: 68,
+                    child: FloatingActionButton(
+                      clipBehavior: Clip.none,
+                      onPressed: () {
+                        showDialog<void>(
+                          context: context,
+                          barrierDismissible: false, // user must tap button!
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Quick actions'),
+                              content: SingleChildScrollView(
+                                  child: Container(
+                                child: Column(
+                                  children: [
+                                    OutlinedButton(
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, MyDogsScreen.id);
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: const Text(
+                                          'Lost my dog',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: mainColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    OutlinedButton(
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, FinderUpload.id);
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: const Text(
+                                          'Found a dog',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: mainColor,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )),
+                              actions: <Widget>[],
+                            );
+                            ;
+                          },
+                        );
+                      },
+                      backgroundColor: Color(0xff88c0b5),
+                      child: Image.asset('images/splashscreenimage.png',
+                          width: 120, height: 120),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
