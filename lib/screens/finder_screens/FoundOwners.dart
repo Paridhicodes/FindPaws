@@ -257,16 +257,16 @@ class _FoundOwnersState extends State<FoundOwners> {
                           },
                           onError: (e) => print("Error getting document: $e"),
                         );
-
-                        sendEmail(
-                          toEmail: ownerMail,
-                          dogName: documentList[i]['name'],
-                          ownerName: ownerName,
-                          finderName: arguments['finder_name'],
-                          finderEmail: arguments['finder_email'],
-                          finderPhone: arguments['finder_phone'],
-                          imageURL: arguments['url'],
-                        );
+                        print('sent email');
+                        // sendEmail(
+                        //   toEmail: ownerMail,
+                        //   dogName: documentList[i]['name'],
+                        //   ownerName: ownerName,
+                        //   finderName: arguments['finder_name'],
+                        //   finderEmail: arguments['finder_email'],
+                        //   finderPhone: arguments['finder_phone'],
+                        //   imageURL: arguments['url'],
+                        // );
                       }
                     },
                     style: OutlinedButton.styleFrom(

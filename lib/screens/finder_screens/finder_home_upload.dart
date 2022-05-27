@@ -178,8 +178,47 @@ class _FinderUploadState extends State<FinderUpload> {
                                   GetDogCat(imageLink: imageFile.path);
 
                               List sec_list = await _getDogCat.initialFunc();
-                              print(sec_list);
-                              if (!sec_list.isEmpty &&
+
+                              if (sec_list.length > 1) {
+                                setState(() {
+                                  spinner = false;
+                                });
+                                showDialog<void>(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text(
+                                          'Please upload a clear image of your dog.'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'The image of your dog must be front-facing and must have proper lighting.'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text(
+                                            'Ok',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: mainColor,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.pushNamed(
+                                                context, FinderUpload.id);
+                                            ;
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else if (!sec_list.isEmpty &&
                                   sec_list[0]['label'] == 'Cat') {
                                 setState(() {
                                   spinner = false;
