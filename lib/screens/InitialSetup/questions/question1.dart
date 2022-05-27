@@ -12,6 +12,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:find_paws_engage/components/AlertBox.dart';
+import 'package:string_extensions/string_extensions.dart';
 
 class Question1 extends StatefulWidget {
   static const String id = "question_01";
@@ -91,7 +92,7 @@ class _Question1State extends State<Question1> {
                   ),
                 ),
                 onChanged: (value) {
-                  name = value;
+                  name = value.toTitleCase!;
                 },
               ),
             ),

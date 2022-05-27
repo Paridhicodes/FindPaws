@@ -20,6 +20,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:find_paws_engage/components/AppBarInit.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -51,21 +52,26 @@ class _HomeScreenState extends State<HomeScreen> {
   String userName = '';
   var arguments;
   List<Widget> widgetList = [];
-
+  bool spinner = false;
   Widget currentScreen = HomeScreen();
   int currentTab = 0;
 
   @override
   void initState() {
     super.initState();
+
     Future.delayed(Duration.zero, () async {
       setState(() {
         arguments = (ModalRoute.of(context)?.settings.arguments ??
             <String, dynamic>{}) as Map;
+        spinner = true;
       });
       if (arguments['url'] != null) {
         addToDb(arguments);
       }
+    });
+    setState(() {
+      spinner = false;
     });
     getCurrentUser();
     getDoc();
@@ -87,23 +93,35 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future logout() async {
+    setState(() {
+      spinner = true;
+    });
     await _auth.signOut().then((value) => Navigator.of(context)
         .pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => WelcomeScreen()),
             (route) => false));
+    setState(() {
+      spinner = false;
+    });
   }
 
   void getDoc() async {
+    setState(() {
+      spinner = true;
+    });
     final docref = await _firestore.collection("details").doc(userId).get();
     setState(() {
       selectedDoc = docref;
       userName = selectedDoc.data()['Name'];
-      print(selectedDoc.data()['Email']);
-      print(userName);
+
+      spinner = false;
     });
   }
 
   void addToDb(final arguments) async {
+    setState(() {
+      spinner = true;
+    });
     await _firestore.collection('pets').add({
       "age_months": arguments['months'],
       "age_years": arguments['years'],
@@ -155,6 +173,9 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }
     }).catchError((error) {});
+    setState(() {
+      spinner = false;
+    });
   }
 
   @override
@@ -316,285 +337,291 @@ class _HomeScreenState extends State<HomeScreen> {
         return Future<bool>.value(true);
       },
       child: Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 2,
-                decoration: BoxDecoration(
-                  color: mainColor,
+        body: ModalProgressHUD(
+          inAsyncCall: spinner,
+          progressIndicator: const CircularProgressIndicator(
+            color: mainColor,
+          ),
+          child: SafeArea(
+            child: Stack(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height / 2,
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
                 ),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
-                    child: TextButton(
-                        child: Icon(
-                          Icons.logout,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          logout();
-                        }),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
-                child: Column(
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Hello, $userName !',
-                          style: TextStyle(
-                              fontSize: 35, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Welcome to your very own pet corner, where you can manage all your doggies and update everything! Happy Pawesome!',
-                        style: TextStyle(
-                          fontSize: 19,
-                        ),
-                      ),
-                    ),
+                      padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
+                      child: TextButton(
+                          child: Icon(
+                            Icons.logout,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            logout();
+                          }),
+                    )
                   ],
                 ),
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
-                  child: SizedBox(
-                    height: 390,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 3,
-                      padding: EdgeInsets.all(12.0),
-                      itemBuilder: (context, index) {
-                        return buildCard(index);
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(width: 12);
-                      },
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Hello, $userName !',
+                            style: TextStyle(
+                                fontSize: 35, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Welcome to your very own pet corner, where you can manage all your doggies and update everything! Happy Pawesome!',
+                          style: TextStyle(
+                            fontSize: 19,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+                    child: SizedBox(
+                      height: 390,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 3,
+                        padding: EdgeInsets.all(12.0),
+                        itemBuilder: (context, index) {
+                          return buildCard(index);
+                        },
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(width: 12);
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: BottomAppBar(
-                  clipBehavior: Clip.none,
-                  color: mainColor,
-                  shape: CircularNotchedRectangle(),
-                  notchMargin: 10,
-                  child: Container(
-                    height: 60,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            MaterialButton(
-                              minWidth: 40,
-                              onPressed: () {
-                                setState(() {
-                                  currentScreen = HomeScreen();
-                                  currentTab = 0;
-                                });
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: BottomAppBar(
+                    clipBehavior: Clip.none,
+                    color: mainColor,
+                    shape: CircularNotchedRectangle(),
+                    notchMargin: 10,
+                    child: Container(
+                      height: 60,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              MaterialButton(
+                                minWidth: 40,
+                                onPressed: () {
+                                  setState(() {
+                                    currentScreen = HomeScreen();
+                                    currentTab = 0;
+                                  });
 
-                                Navigator.pushNamed(context, UploadImage.id);
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    CustomIcons.dog,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                  Text(
-                                    'Add Dog',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            MaterialButton(
-                              minWidth: 40,
-                              onPressed: () {
-                                setState(() {
-                                  currentScreen = HomeScreen();
-                                  currentTab = 0;
-                                });
-                                Navigator.pushNamed(context, NearMe.id);
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    CustomIconsPaws.paw,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                  Text(
-                                    'Near me',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            MaterialButton(
-                              minWidth: 40,
-                              onPressed: () {
-                                setState(() {
-                                  currentScreen = HomeScreen();
-                                  currentTab = 0;
-                                });
-                                Navigator.pushNamed(context, AboutUs.id);
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    Info.info_circled,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                  Text(
-                                    'About Us',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            MaterialButton(
-                              minWidth: 40,
-                              onPressed: () {
-                                setState(() {
-                                  currentScreen = HomeScreen();
-                                  currentTab = 0;
-                                });
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    Icons.person,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                  Text(
-                                    'My Profile',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-                  child: SizedBox(
-                    width: 68,
-                    height: 68,
-                    child: FloatingActionButton(
-                      clipBehavior: Clip.none,
-                      onPressed: () {
-                        showDialog<void>(
-                          context: context,
-                          barrierDismissible: false, // user must tap button!
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Quick actions'),
-                              content: SingleChildScrollView(
-                                  child: Container(
+                                  Navigator.pushNamed(context, UploadImage.id);
+                                },
                                 child: Column(
-                                  children: [
-                                    OutlinedButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, MyDogsScreen.id);
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: const Text(
-                                          'Lost my dog',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: mainColor,
-                                          ),
-                                        ),
-                                      ),
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(
+                                      CustomIcons.dog,
+                                      color: Colors.white,
+                                      size: 20,
                                     ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    OutlinedButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, FinderUpload.id);
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: const Text(
-                                          'Found a dog',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: mainColor,
-                                          ),
-                                        ),
+                                    Text(
+                                      'Add Dog',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
                                       ),
                                     )
                                   ],
                                 ),
-                              )),
-                              actions: <Widget>[],
-                            );
-                            ;
-                          },
-                        );
-                      },
-                      backgroundColor: Color(0xff88c0b5),
-                      child: Image.asset('images/splashscreenimage.png',
-                          width: 120, height: 120),
+                              ),
+                              MaterialButton(
+                                minWidth: 40,
+                                onPressed: () {
+                                  setState(() {
+                                    currentScreen = HomeScreen();
+                                    currentTab = 0;
+                                  });
+                                  Navigator.pushNamed(context, NearMe.id);
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(
+                                      CustomIconsPaws.paw,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                    Text(
+                                      'Near me',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              MaterialButton(
+                                minWidth: 40,
+                                onPressed: () {
+                                  setState(() {
+                                    currentScreen = HomeScreen();
+                                    currentTab = 0;
+                                  });
+                                  Navigator.pushNamed(context, AboutUs.id);
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(
+                                      Info.info_circled,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                    Text(
+                                      'About Us',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              MaterialButton(
+                                minWidth: 40,
+                                onPressed: () {
+                                  setState(() {
+                                    currentScreen = HomeScreen();
+                                    currentTab = 0;
+                                  });
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(
+                                      Icons.person,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                    Text(
+                                      'My Profile',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                    child: SizedBox(
+                      width: 68,
+                      height: 68,
+                      child: FloatingActionButton(
+                        clipBehavior: Clip.none,
+                        onPressed: () {
+                          showDialog<void>(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Quick actions'),
+                                content: SingleChildScrollView(
+                                    child: Container(
+                                  child: Column(
+                                    children: [
+                                      OutlinedButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, MyDogsScreen.id);
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: const Text(
+                                            'Lost my dog',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              color: mainColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      OutlinedButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, FinderUpload.id);
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: const Text(
+                                            'Found a dog',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              color: mainColor,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )),
+                                actions: <Widget>[],
+                              );
+                              ;
+                            },
+                          );
+                        },
+                        backgroundColor: Color(0xff88c0b5),
+                        child: Image.asset('images/splashscreenimage.png',
+                            width: 120, height: 120),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
