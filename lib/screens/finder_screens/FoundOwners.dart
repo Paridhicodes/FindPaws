@@ -343,7 +343,7 @@ class _FoundOwnersState extends State<FoundOwners> {
       final snackBar = SnackBar(
         content: Row(
           children: [
-            Icon(
+            const Icon(
               Icons.check_circle_outline,
               size: 17,
               color: Colors.white,
@@ -374,7 +374,7 @@ class _FoundOwnersState extends State<FoundOwners> {
       final snackBar = SnackBar(
         content: Row(
           children: [
-            Icon(
+            const Icon(
               Icons.cancel_outlined,
               size: 17,
               color: Colors.white,

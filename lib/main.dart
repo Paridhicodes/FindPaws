@@ -7,6 +7,7 @@ import 'package:find_paws_engage/screens/InitialSetup/questions/question3.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question4.dart';
 import 'package:find_paws_engage/screens/edit_pages/dog_profile_edit.dart';
 import 'package:find_paws_engage/screens/edit_pages/fetch_location.dart';
+import 'package:find_paws_engage/screens/edit_pages/user_profile_edit.dart';
 import 'package:find_paws_engage/screens/finder_screens/FinderChecklist.dart';
 import 'package:find_paws_engage/screens/finder_screens/FinderDetails.dart';
 import 'package:find_paws_engage/screens/finder_screens/FoundOwners.dart';
@@ -65,7 +66,7 @@ class findPaws extends StatelessWidget {
         HomeScreen.id: (context) => HomeScreen(),
         DogProfileEdit.id: (context) => DogProfileEdit(),
         MyDogsScreen.id: (context) => MyDogsScreen(),
-
+        UserProfile.id: (context) => UserProfile(),
         FetchLocation.id: (context) => FetchLocation(),
         LostDogCheck.id: (context) => LostDogCheck(),
         FinderUpload.id: (context) => FinderUpload(),

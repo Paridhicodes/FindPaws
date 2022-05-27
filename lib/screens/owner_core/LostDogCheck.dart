@@ -5,6 +5,7 @@ import 'package:find_paws_engage/custom_icons_paws_icons.dart';
 import 'package:find_paws_engage/screens/InitialSetup/questions/question2.dart';
 import 'package:find_paws_engage/screens/edit_pages/dog_profile_edit.dart';
 import 'package:find_paws_engage/screens/edit_pages/fetch_location.dart';
+import 'package:find_paws_engage/screens/edit_pages/user_profile_edit.dart';
 
 import 'package:find_paws_engage/screens/owner_core/home_screen.dart';
 import 'package:find_paws_engage/screens/welcome_screen.dart';
@@ -111,6 +112,8 @@ class _LostDogCheckState extends State<LostDogCheck> {
                           setState(() {
                             iconKeeper[0] = 1;
                           });
+                          Navigator.pushNamed(context, DogProfileEdit.id,
+                              arguments: {'doc_id': arguments['doc_id']});
                         },
                         child: ListTile(
                           leading: Icon(
@@ -134,6 +137,7 @@ class _LostDogCheckState extends State<LostDogCheck> {
                           setState(() {
                             iconKeeper[1] = 1;
                           });
+                          Navigator.pushNamed(context, UserProfile.id);
                         },
                         child: ListTile(
                           leading: Icon(
