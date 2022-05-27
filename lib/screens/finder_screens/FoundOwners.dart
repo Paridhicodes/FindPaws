@@ -12,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:find_paws_engage/constants.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../components/AlertBox.dart';
 import 'finder_home_upload.dart';
@@ -200,10 +201,26 @@ class _FoundOwnersState extends State<FoundOwners> {
                   ),
                   OutlinedButton(
                     onPressed: () async {
+                      String ownerName = '';
+                      String ownerMail = '';
+
+                      var docRef = _firestore
+                          .collection('details')
+                          .doc(documentList[i]['owner_id']);
+                      await docRef.get().then(
+                        (DocumentSnapshot doc) {
+                          final data = doc.data() as Map<String, dynamic>;
+                          String tempownerName = data['Name'];
+                          String tempownerMail = data['Email'];
+                          setState(() {
+                            ownerName = tempownerName;
+                            ownerMail = tempownerMail;
+                          });
+                        },
+                        onError: (e) => print("Error getting document: $e"),
+                      );
+
                       if (!permissionTaken) {
-                        setState(() {
-                          permissionTaken = true;
-                        });
                         showDialog<void>(
                             context: context,
                             barrierDismissible: false, // user must tap button!
@@ -212,7 +229,7 @@ class _FoundOwnersState extends State<FoundOwners> {
                                 title: Text('Sharing of Details '),
                                 content: SingleChildScrollView(
                                   child: ListBody(
-                                    children: <Widget>[
+                                    children: const <Widget>[
                                       Text(
                                           'Please confirm that you agree to share your contact details with the potential pet owner and the findPaws team.'),
                                     ],
@@ -220,7 +237,7 @@ class _FoundOwnersState extends State<FoundOwners> {
                                 ),
                                 actions: <Widget>[
                                   TextButton(
-                                    child: Text(
+                                    child: const Text(
                                       'Yes',
                                       style: TextStyle(
                                         fontSize: 18,
@@ -229,44 +246,35 @@ class _FoundOwnersState extends State<FoundOwners> {
                                     ),
                                     onPressed: () {
                                       setState(() {
-                                        allowed = true;
+                                        permissionTaken = true;
                                       });
                                       Navigator.of(context).pop();
+                                      sendEmail(
+                                        toEmail: ownerMail,
+                                        dogName: documentList[i]['name'],
+                                        ownerName: ownerName,
+                                        finderName: arguments['finder_name'],
+                                        finderEmail: arguments['finder_email'],
+                                        finderPhone: arguments['finder_phone'],
+                                        imageURL: arguments['url'],
+                                      );
                                     },
                                   ),
                                 ],
                               );
                             });
                       }
-                      if (allowed) {
-                        String ownerName = '';
-                        String ownerMail = '';
 
-                        var docRef = _firestore
-                            .collection('details')
-                            .doc(documentList[i]['owner_id']);
-                        await docRef.get().then(
-                          (DocumentSnapshot doc) {
-                            final data = doc.data() as Map<String, dynamic>;
-                            String tempownerName = data['Name'];
-                            String tempownerMail = data['Email'];
-                            setState(() {
-                              ownerName = tempownerName;
-                              ownerMail = tempownerMail;
-                            });
-                          },
-                          onError: (e) => print("Error getting document: $e"),
+                      if (permissionTaken) {
+                        sendEmail(
+                          toEmail: ownerMail,
+                          dogName: documentList[i]['name'],
+                          ownerName: ownerName,
+                          finderName: arguments['finder_name'],
+                          finderEmail: arguments['finder_email'],
+                          finderPhone: arguments['finder_phone'],
+                          imageURL: arguments['url'],
                         );
-                        print('sent email');
-                        // sendEmail(
-                        //   toEmail: ownerMail,
-                        //   dogName: documentList[i]['name'],
-                        //   ownerName: ownerName,
-                        //   finderName: arguments['finder_name'],
-                        //   finderEmail: arguments['finder_email'],
-                        //   finderPhone: arguments['finder_phone'],
-                        //   imageURL: arguments['url'],
-                        // );
                       }
                     },
                     style: OutlinedButton.styleFrom(
@@ -330,6 +338,69 @@ class _FoundOwnersState extends State<FoundOwners> {
         }
       }),
     );
-    // print(response.body);
+
+    if (response.body == 'OK') {
+      final snackBar = SnackBar(
+        content: Row(
+          children: [
+            Icon(
+              Icons.check_circle_outline,
+              size: 17,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Mail Sent!',
+              style: GoogleFonts.dosis(
+                  textStyle: TextStyle(
+                fontSize: 15,
+              )),
+            )
+          ],
+        ),
+        backgroundColor: Colors.green,
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            // Some code to undo the change.
+          },
+        ),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      final snackBar = SnackBar(
+        content: Row(
+          children: [
+            Icon(
+              Icons.cancel_outlined,
+              size: 17,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Error Occurred!',
+              style: GoogleFonts.dosis(
+                  textStyle: TextStyle(
+                fontSize: 15,
+              )),
+            )
+          ],
+        ),
+        backgroundColor: Colors.red,
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            // Some code to undo the change.
+          },
+        ),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 }
