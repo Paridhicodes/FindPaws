@@ -228,8 +228,8 @@ class _FinderUploadState extends State<FinderUpload> {
                                     GetDogCat(imageLink: imageFile.path);
 
                                 List sec_list = await _getDogCat.initialFunc();
-                                print(list);
-                                print(sec_list);
+                                // print(list);
+                                // print(sec_list);
                                 if (sec_list.length > 1 &&
                                     sec_list[0]['label'] == 'Cat') {
                                   setState(() {
@@ -387,7 +387,7 @@ class _FinderUploadState extends State<FinderUpload> {
     if (pickedFile != null) {
       setState(() {
         imageFile = File(pickedFile.path);
-        print(imageFile);
+        // print(imageFile);
       });
     }
   }

@@ -170,7 +170,7 @@ class _UploadImageState extends State<UploadImage> {
                                     spinner = true;
                                   });
                                   // checkBreed();
-                                  print(imagePath);
+                                  // print(imagePath);
                                   GetBreed _getBreed =
                                       GetBreed(imageLink: imagePath);
                                   List list = await _getBreed.initialFunc();

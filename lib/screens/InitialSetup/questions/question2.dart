@@ -87,7 +87,7 @@ class _Question2State extends State<Question2> {
                       setState(
                         () {
                           _character = value!;
-                          print(_character);
+                          // print(_character);
                         },
                       );
                     },
@@ -108,7 +108,7 @@ class _Question2State extends State<Question2> {
                     onChanged: (value) {
                       setState(() {
                         _character = value!;
-                        print(_character);
+                        // print(_character);
                       });
                     },
                   ),

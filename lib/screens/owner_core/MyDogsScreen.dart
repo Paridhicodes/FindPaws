@@ -78,7 +78,7 @@ class _MyDogsScreenState extends State<MyDogsScreen> {
                         ),
                       );
                     }
-                    print(futureSnapshot.data);
+                    // print(futureSnapshot.data);
                     return StreamBuilder<QuerySnapshot>(
 
                         // <2> Pass `Stream<QuerySnapshot>` to stream
@@ -91,7 +91,7 @@ class _MyDogsScreenState extends State<MyDogsScreen> {
                             // <3> Retrieve `List<DocumentSnapshot>` from snapshot
                             final List<DocumentSnapshot> documents =
                                 snapshot.data!.docs;
-                            print(documents.length);
+                            // print(documents.length);
 
                             return SingleChildScrollView(
                               child: ListView.builder(
@@ -340,8 +340,8 @@ class _MyDogsScreenState extends State<MyDogsScreen> {
                                                                       .update({
                                                                     'lost': true
                                                                   });
-                                                                  print(
-                                                                      'called');
+                                                                  // print(
+                                                                  //     'called');
                                                                   Navigator.pushNamed(
                                                                       context,
                                                                       LostDogCheck

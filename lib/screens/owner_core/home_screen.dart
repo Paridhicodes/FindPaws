@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'name': arguments['name'],
       'owner_id': userId
     }).then((value) {
-      print(value.id);
+      // print(value.id);
       if (arguments['isLost']) {
         showDialog<void>(
           context: context,
@@ -238,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    print('Tapped');
+                                    // print('Tapped');
                                   },
                                   child: InkWell(
                                     child: Icon(

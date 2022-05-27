@@ -234,7 +234,7 @@ class _FinderCheckListState extends State<FinderCheckList> {
         _currlat = value.latitude;
         _currlong = value.longitude;
       });
-      print(value);
+      // print(value);
     });
   }
 }

@@ -132,16 +132,15 @@ class _DisplayBreedState extends State<DisplayBreed> {
                               );
                             },
                           )
-                        : print(_breed);
-                    Navigator.pushNamed(
-                      context,
-                      Question1.id,
-                      arguments: {
-                        'url': arguments['url'],
-                        'list': arguments['list'],
-                        'breed': _breed
-                      },
-                    );
+                        : Navigator.pushNamed(
+                            context,
+                            Question1.id,
+                            arguments: {
+                              'url': arguments['url'],
+                              'list': arguments['list'],
+                              'breed': _breed
+                            },
+                          );
                   })
             ],
           ),

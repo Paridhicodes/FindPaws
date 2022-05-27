@@ -79,12 +79,12 @@ class _NearMeState extends State<NearMe> {
       final response = await documentList;
       documentList.forEach((DocumentSnapshot document) {
         tempowners.add(document);
-        print(document.data());
+        // print(document.data());
       });
 
       setState(() {
         lostpets = tempowners;
-        print(lostpets);
+        // print(lostpets);
       });
     });
   }

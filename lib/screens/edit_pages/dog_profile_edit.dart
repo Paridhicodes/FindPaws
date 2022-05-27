@@ -571,8 +571,8 @@ class _DogProfileEditState extends State<DogProfileEdit> {
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
-                                                      print(dogYr);
-                                                      print(dogMon);
+                                                      // print(dogYr);
+                                                      // print(dogMon);
                                                       if (tempYr == '0' &&
                                                           tempMon == '0') {
                                                         showDialog<void>(

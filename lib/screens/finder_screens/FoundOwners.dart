@@ -35,7 +35,7 @@ class _FoundOwnersState extends State<FoundOwners> {
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
-    print(arguments['owner_list']);
+    // print(arguments['owner_list']);
 
     return Scaffold(
         body: SingleChildScrollView(
