@@ -179,7 +179,8 @@ class _FinderUploadState extends State<FinderUpload> {
 
                               List sec_list = await _getDogCat.initialFunc();
 
-                              if (sec_list.length > 1) {
+                              if (sec_list.length > 1 &&
+                                  sec_list[0]['label'] == 'Cat') {
                                 setState(() {
                                   spinner = false;
                                 });

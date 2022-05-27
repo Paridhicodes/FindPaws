@@ -180,6 +180,7 @@ class _UploadImageState extends State<UploadImage> {
 
                                   List sec_list =
                                       await _getDogCat.initialFunc();
+
                                   if (sec_list.length > 1) {
                                     setState(() {
                                       spinner = false;
