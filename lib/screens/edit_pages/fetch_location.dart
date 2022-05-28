@@ -76,165 +76,167 @@ class _FetchLocationState extends State<FetchLocation> {
         <String, dynamic>{}) as Map;
     // print(arguments['doc_id']);
     return Scaffold(
-      body: Column(
-        children: [
-          AppBarInit(),
-          Stack(
-            fit: StackFit.loose,
-            alignment: Alignment.bottomRight,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 2,
-                  width: MediaQuery.of(context).size.width,
-                  child: GoogleMap(
-                    zoomControlsEnabled: false,
-                    initialCameraPosition: CameraPosition(
-                      target: LatLng(48.8561, 2.2930),
-                      zoom: 12.0,
-                    ),
-                    onMapCreated: (GoogleMapController controller) {
-                      _controller = controller;
-                    },
-                    markers: _markers,
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: FloatingActionButton(
-                    backgroundColor: mainColor,
-                    child: Icon(
-                      Icons.location_searching,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      getLocation();
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: SizedBox(
-                  height: 50.0,
-                  child: ListTile(
-                    title: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 20, 0, 8),
-                      child: Center(
-                        child: Text(
-                          'Latitude',
-                          style: TextStyle(fontSize: 13),
-                        ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            AppBarInit(),
+            Stack(
+              fit: StackFit.loose,
+              alignment: Alignment.bottomRight,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height / 2,
+                    width: MediaQuery.of(context).size.width,
+                    child: GoogleMap(
+                      zoomControlsEnabled: false,
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(48.8561, 2.2930),
+                        zoom: 12.0,
                       ),
-                    ),
-                    subtitle: UnconstrainedBox(
-                      child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            // mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                '$currLat',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                ),
-                              ), // <-- Text
-                              SizedBox(
-                                width: 50,
-                              ),
-                            ],
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: mainColor,
-                            width: 1,
-                          ),
-                        ),
-                      ),
+                      onMapCreated: (GoogleMapController controller) {
+                        _controller = controller;
+                      },
+                      markers: _markers,
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: SizedBox(
-                  height: 50.0,
-                  child: ListTile(
-                    title: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 20, 0, 8),
-                      child: Center(
-                        child: Text(
-                          'Longitude',
-                          style: TextStyle(fontSize: 13),
-                        ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: FloatingActionButton(
+                      backgroundColor: mainColor,
+                      child: Icon(
+                        Icons.location_searching,
+                        color: Colors.white,
                       ),
-                    ),
-                    subtitle: UnconstrainedBox(
-                      child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            // mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                '$currLong',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                ),
-                              ), // <-- Text
-                              SizedBox(
-                                width: 50,
-                              ),
-                            ],
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: mainColor,
-                            width: 1,
-                          ),
-                        ),
-                      ),
+                      onPressed: () {
+                        getLocation();
+                      },
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-            child: RoundedButton(
-              onPressed: () {
-                GeoFirePoint myLocation =
-                    geo.point(latitude: currLat, longitude: currLong);
-                _firestore
-                    .collection('pets')
-                    .doc(arguments['doc_id'])
-                    .update({'point': myLocation.data});
-                Navigator.pop(context);
-              },
-              buttonText: 'Done',
-              textSize: 18,
-              buttonSize: 120,
+              ],
             ),
-          )
-        ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 50.0,
+                    child: ListTile(
+                      title: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 8),
+                        child: Center(
+                          child: Text(
+                            'Latitude',
+                            style: TextStyle(fontSize: 13),
+                          ),
+                        ),
+                      ),
+                      subtitle: UnconstrainedBox(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              // mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  '$currLat',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                  ),
+                                ), // <-- Text
+                                SizedBox(
+                                  width: 50,
+                                ),
+                              ],
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: mainColor,
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 50.0,
+                    child: ListTile(
+                      title: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 8),
+                        child: Center(
+                          child: Text(
+                            'Longitude',
+                            style: TextStyle(fontSize: 13),
+                          ),
+                        ),
+                      ),
+                      subtitle: UnconstrainedBox(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              // mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  '$currLong',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                  ),
+                                ), // <-- Text
+                                SizedBox(
+                                  width: 50,
+                                ),
+                              ],
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: mainColor,
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+              child: RoundedButton(
+                onPressed: () {
+                  GeoFirePoint myLocation =
+                      geo.point(latitude: currLat, longitude: currLong);
+                  _firestore
+                      .collection('pets')
+                      .doc(arguments['doc_id'])
+                      .update({'point': myLocation.data});
+                  Navigator.pop(context);
+                },
+                buttonText: 'Done',
+                textSize: 18,
+                buttonSize: 120,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

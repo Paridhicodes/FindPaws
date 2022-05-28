@@ -43,106 +43,109 @@ class _DisplayBreedState extends State<DisplayBreed> {
           FocusScope.of(context).requestFocus(new FocusNode());
         },
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const AppBarInit(),
-              const SizedBox(
-                height: 30,
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: StepProgressIndicator(
-                  totalSteps: 5,
-                  currentStep: 1,
-                  selectedColor: Color(0xffdb8207),
-                  unselectedColor: Color(0xFFf5c489),
-                  size: 10,
-                  roundedEdges: Radius.circular(10),
+          child: SafeArea(
+            child: Column(
+              children: [
+                const AppBarInit(),
+                const SizedBox(
+                  height: 30,
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "Select the breed of your dog.",
-                        style: TextStyle(
-                            fontSize: 40, fontWeight: FontWeight.w700),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: StepProgressIndicator(
+                    totalSteps: 5,
+                    currentStep: 1,
+                    selectedColor: Color(0xffdb8207),
+                    unselectedColor: Color(0xFFf5c489),
+                    size: 10,
+                    roundedEdges: Radius.circular(10),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Select the breed of your dog.",
+                          style: TextStyle(
+                              fontSize: 40, fontWeight: FontWeight.w700),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Column(
-                children: [getButtons(arguments['list'])],
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                child: TextFormField(
-                  style: const TextStyle(
-                    fontSize: 25,
-                  ),
-                  cursorHeight: 30,
-                  cursorColor: Colors.grey,
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: mainColor, width: 1.0),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: mainColor, width: 3.0),
-                    ),
-                    labelText: 'Specify, if other',
-                    labelStyle: TextStyle(
-                      fontSize: 20,
-                      color: mainColor,
-                    ),
-                  ),
-                  onChanged: (value) {
-                    _breed = value.toTitleCase!;
-                  },
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              const SizedBox(
-                height: 110,
-              ),
-              RoundedButton(
-                  buttonText: 'Next',
-                  onPressed: () {
-                    _breed == "none"
-                        ? showDialog<void>(
-                            context: context,
-                            barrierDismissible: false, // user must tap button!
-                            builder: (BuildContext context) {
-                              return AlertBox(
-                                titleText:
-                                    'Please select the breed of your dog!',
-                                bodyText: '',
-                              );
-                            },
-                          )
-                        : Navigator.pushNamed(
-                            context,
-                            Question1.id,
-                            arguments: {
-                              'url': arguments['url'],
-                              'list': arguments['list'],
-                              'breed': _breed
-                            },
-                          );
-                  })
-            ],
+                Column(
+                  children: [getButtons(arguments['list'])],
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                  child: TextFormField(
+                    style: const TextStyle(
+                      fontSize: 25,
+                    ),
+                    cursorHeight: 30,
+                    cursorColor: Colors.grey,
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: mainColor, width: 1.0),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: mainColor, width: 3.0),
+                      ),
+                      labelText: 'Specify, if other',
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                        color: mainColor,
+                      ),
+                    ),
+                    onChanged: (value) {
+                      _breed = value.toTitleCase!;
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 110,
+                ),
+                RoundedButton(
+                    buttonText: 'Next',
+                    onPressed: () {
+                      _breed == "none"
+                          ? showDialog<void>(
+                              context: context,
+                              barrierDismissible:
+                                  false, // user must tap button!
+                              builder: (BuildContext context) {
+                                return AlertBox(
+                                  titleText:
+                                      'Please select the breed of your dog!',
+                                  bodyText: '',
+                                );
+                              },
+                            )
+                          : Navigator.pushNamed(
+                              context,
+                              Question1.id,
+                              arguments: {
+                                'url': arguments['url'],
+                                'list': arguments['list'],
+                                'breed': _breed
+                              },
+                            );
+                    })
+              ],
+            ),
           ),
         ),
       ),

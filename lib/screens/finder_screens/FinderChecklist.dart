@@ -47,140 +47,142 @@ class _FinderCheckListState extends State<FinderCheckList> {
         <String, dynamic>{}) as Map;
 
     return Scaffold(
-      body: Column(
-        children: [
-          AppBar(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'images/splashscreenimage.png',
-                  width: 70,
-                  height: 70,
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 65),
-                  child: Text(
-                    'Finder Check List',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
+      body: SafeArea(
+        child: Column(
+          children: [
+            AppBar(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'images/splashscreenimage.png',
+                    width: 70,
+                    height: 70,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 65),
+                    child: Text(
+                      'Finder Check List',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
+                  ),
+                ],
+              ),
+              backgroundColor: mainColor,
+              toolbarHeight: 70,
+              elevation: 5,
+            ),
+            Column(
+              children: [
+                Container(
+                  height: 2 * MediaQuery.of(context).size.height / 3,
+                  child: ListView(
+                    children: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          print("n");
+                        },
+                        child: const ListTile(
+                          leading: Icon(
+                            Icons.check_circle_outline_outlined,
+                            size: 25,
+                            color: Colors.green,
+                          ),
+                          title: Text(
+                            'The probable breeds of the dog are:',
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 100),
+                        child: Container(
+                          child: getButtons(
+                            arguments['list'],
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            loc = true;
+                          });
+                          Future<Position?> newPos = determinePosition();
+                          if (_currlat == 0 && _currlong == 0) {
+                            const Center(child: CircularProgressIndicator());
+                          }
+                        },
+                        child: ListTile(
+                          leading: Icon(
+                            loc == false
+                                ? Icons.radio_button_unchecked
+                                : Icons.check_circle_outline_outlined,
+                            size: 25,
+                            color: loc == false ? Colors.red : Colors.green,
+                          ),
+                          title: const Text(
+                            'Allow us to get your location',
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(50, 50, 50, 0),
+                        child: RoundedButton(
+                          buttonText: 'Next',
+                          onPressed: () {
+                            if (!loc || (_currlat == 0 && _currlong == 0)) {
+                              if (loc) {
+                                showDialog<void>(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertBox(
+                                      titleText:
+                                          'We are still fetching your current location...',
+                                      bodyText: '',
+                                      finalText: 'Wait',
+                                    );
+                                  },
+                                );
+                              } else {
+                                showDialog<void>(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertBox(
+                                      titleText: 'Tick all the tasks!',
+                                      bodyText: '',
+                                    );
+                                  },
+                                );
+                              }
+                            } else {
+                              Navigator.pushNamed(context, FinderDetails.id,
+                                  arguments: {
+                                    'lat': _currlat,
+                                    'long': _currlong,
+                                    'url': arguments['url'],
+                                    'list': arguments['list'],
+                                  });
+                            }
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ],
-            ),
-            backgroundColor: mainColor,
-            toolbarHeight: 70,
-            elevation: 5,
-          ),
-          Column(
-            children: [
-              Container(
-                height: 2 * MediaQuery.of(context).size.height / 3,
-                child: ListView(
-                  children: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        print("n");
-                      },
-                      child: const ListTile(
-                        leading: Icon(
-                          Icons.check_circle_outline_outlined,
-                          size: 25,
-                          color: Colors.green,
-                        ),
-                        title: Text(
-                          'The probable breeds of the dog are:',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 100),
-                      child: Container(
-                        child: getButtons(
-                          arguments['list'],
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          loc = true;
-                        });
-                        Future<Position?> newPos = determinePosition();
-                        if (_currlat == 0 && _currlong == 0) {
-                          const Center(child: CircularProgressIndicator());
-                        }
-                      },
-                      child: ListTile(
-                        leading: Icon(
-                          loc == false
-                              ? Icons.radio_button_unchecked
-                              : Icons.check_circle_outline_outlined,
-                          size: 25,
-                          color: loc == false ? Colors.red : Colors.green,
-                        ),
-                        title: const Text(
-                          'Allow us to get your location',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(50, 50, 50, 0),
-                      child: RoundedButton(
-                        buttonText: 'Next',
-                        onPressed: () {
-                          if (!loc || (_currlat == 0 && _currlong == 0)) {
-                            if (loc) {
-                              showDialog<void>(
-                                context: context,
-                                barrierDismissible:
-                                    false, // user must tap button!
-                                builder: (BuildContext context) {
-                                  return AlertBox(
-                                    titleText:
-                                        'We are still fetching your current location...',
-                                    bodyText: '',
-                                    finalText: 'Wait',
-                                  );
-                                },
-                              );
-                            } else {
-                              showDialog<void>(
-                                context: context,
-                                barrierDismissible:
-                                    false, // user must tap button!
-                                builder: (BuildContext context) {
-                                  return AlertBox(
-                                    titleText: 'Tick all the tasks!',
-                                    bodyText: '',
-                                  );
-                                },
-                              );
-                            }
-                          } else {
-                            Navigator.pushNamed(context, FinderDetails.id,
-                                arguments: {
-                                  'lat': _currlat,
-                                  'long': _currlong,
-                                  'url': arguments['url'],
-                                  'list': arguments['list'],
-                                });
-                          }
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

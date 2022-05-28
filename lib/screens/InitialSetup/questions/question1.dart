@@ -31,101 +31,104 @@ class _Question1State extends State<Question1> {
         <String, dynamic>{}) as Map;
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const AppBarInit(),
-            const SizedBox(
-              height: 30,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: StepProgressIndicator(
-                totalSteps: 5,
-                currentStep: 2,
-                selectedColor: Color(0xffdb8207),
-                unselectedColor: Color(0xFFf5c489),
-                size: 10,
-                roundedEdges: Radius.circular(10),
+        child: SafeArea(
+          child: Column(
+            children: [
+              const AppBarInit(),
+              const SizedBox(
+                height: 30,
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "What is the name of your dog?",
-                      style:
-                          TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: StepProgressIndicator(
+                  totalSteps: 5,
+                  currentStep: 2,
+                  selectedColor: Color(0xffdb8207),
+                  unselectedColor: Color(0xFFf5c489),
+                  size: 10,
+                  roundedEdges: Radius.circular(10),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "What is the name of your dog?",
+                        style: TextStyle(
+                            fontSize: 40, fontWeight: FontWeight.w700),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 56),
-              child: TextFormField(
-                style: const TextStyle(
-                  fontSize: 30,
-                ),
-                cursorHeight: 30,
-                cursorColor: Colors.grey,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: mainColor),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: mainColor, width: 1.0),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: mainColor, width: 4.0),
-                  ),
-                  labelText: 'Name',
-                  labelStyle: TextStyle(
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 33, vertical: 56),
+                child: TextFormField(
+                  style: const TextStyle(
                     fontSize: 30,
-                    color: mainColor,
                   ),
+                  cursorHeight: 30,
+                  cursorColor: Colors.grey,
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: mainColor),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: mainColor, width: 1.0),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: mainColor, width: 4.0),
+                    ),
+                    labelText: 'Name',
+                    labelStyle: TextStyle(
+                      fontSize: 30,
+                      color: mainColor,
+                    ),
+                  ),
+                  onChanged: (value) {
+                    name = value.toTitleCase!;
+                  },
                 ),
-                onChanged: (value) {
-                  name = value.toTitleCase!;
-                },
               ),
-            ),
-            const SizedBox(
-              height: 100,
-            ),
-            RoundedButton(
-                buttonText: 'Next',
-                onPressed: () {
-                  name == ""
-                      ? showDialog<void>(
-                          context: context,
-                          barrierDismissible: false, // user must tap button!
-                          builder: (BuildContext context) {
-                            return AlertBox(
-                              titleText: 'Please enter a valid name!',
-                              bodyText:
-                                  'The name must have at least one character.',
-                            );
-                          },
-                        )
-                      : Navigator.pushNamed(
-                          context,
-                          Question2.id,
-                          arguments: {
-                            'url': arguments['url'],
-                            'list': arguments['list'],
-                            'breed': arguments['breed'],
-                            'name': name,
-                          },
-                        );
-                })
-          ],
+              const SizedBox(
+                height: 100,
+              ),
+              RoundedButton(
+                  buttonText: 'Next',
+                  onPressed: () {
+                    name == ""
+                        ? showDialog<void>(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return AlertBox(
+                                titleText: 'Please enter a valid name!',
+                                bodyText:
+                                    'The name must have at least one character.',
+                              );
+                            },
+                          )
+                        : Navigator.pushNamed(
+                            context,
+                            Question2.id,
+                            arguments: {
+                              'url': arguments['url'],
+                              'list': arguments['list'],
+                              'breed': arguments['breed'],
+                              'name': name,
+                            },
+                          );
+                  })
+            ],
+          ),
         ),
       ),
     );

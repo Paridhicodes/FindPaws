@@ -96,147 +96,152 @@ class _LostDogCheckState extends State<LostDogCheck> {
         return Future<bool>.value(true);
       },
       child: Scaffold(
-        body: Column(
-          children: [
-            AppBarInit(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height / 2,
-                  child: ListView(
-                    children: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          count++;
-                          setState(() {
-                            iconKeeper[0] = 1;
-                          });
-                          Navigator.pushNamed(context, DogProfileEdit.id,
-                              arguments: {'doc_id': arguments['doc_id']});
-                        },
-                        child: ListTile(
-                          leading: Icon(
-                            iconKeeper[0] == 0
-                                ? Icons.radio_button_unchecked
-                                : Icons.check_circle_outline_outlined,
-                            size: 25,
-                            color:
-                                iconKeeper[0] == 0 ? Colors.red : Colors.green,
-                          ),
-                          title: Text(
-                            'Check your dog\'s profile',
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          count++;
-                          setState(() {
-                            iconKeeper[1] = 1;
-                          });
-                          Navigator.pushNamed(context, UserProfile.id);
-                        },
-                        child: ListTile(
-                          leading: Icon(
-                            iconKeeper[1] == 0
-                                ? Icons.radio_button_unchecked
-                                : Icons.check_circle_outline_outlined,
-                            size: 25,
-                            color:
-                                iconKeeper[1] == 0 ? Colors.red : Colors.green,
-                          ),
-                          title: Text(
-                            'Check your personal details',
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          count++;
-                          setState(() {
-                            iconKeeper[2] = 1;
-                          });
-                          Navigator.pushNamed(context, FetchLocation.id,
-                              arguments: {'doc_id': arguments['doc_id']});
-                        },
-                        child: ListTile(
-                          leading: Icon(
-                            iconKeeper[2] == 0
-                                ? Icons.radio_button_unchecked
-                                : Icons.check_circle_outline_outlined,
-                            size: 25,
-                            color:
-                                iconKeeper[2] == 0 ? Colors.red : Colors.green,
-                          ),
-                          title: Text(
-                            'Allow us to get your location',
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                RoundedButton(
-                  buttonText: 'Done',
-                  onPressed: () {
-                    if (count < 3) {
-                      showDialog<void>(
-                        context: context,
-                        barrierDismissible: false, // user must tap button!
-                        builder: (BuildContext context) {
-                          return AlertBox(
-                            titleText: 'Tick all the tasks!',
-                            bodyText: '',
-                          );
-                        },
-                      );
-                    } else {
-                      showDialog<void>(
-                        context: context,
-                        barrierDismissible: false, // user must tap button!
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text(
-                                'The required details have been recorded.'),
-                            content: SingleChildScrollView(
-                              child: ListBody(
-                                children: <Widget>[
-                                  Text(
-                                      'We shall inform you as soon as we get an update!'),
-                                ],
-                              ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              AppBarInit(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height / 2,
+                    child: ListView(
+                      children: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            count++;
+                            setState(() {
+                              iconKeeper[0] = 1;
+                            });
+                            Navigator.pushNamed(context, DogProfileEdit.id,
+                                arguments: {'doc_id': arguments['doc_id']});
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              iconKeeper[0] == 0
+                                  ? Icons.radio_button_unchecked
+                                  : Icons.check_circle_outline_outlined,
+                              size: 25,
+                              color: iconKeeper[0] == 0
+                                  ? Colors.red
+                                  : Colors.green,
                             ),
-                            actions: <Widget>[
-                              TextButton(
-                                child: Text(
-                                  'Ok',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: mainColor,
-                                  ),
+                            title: Text(
+                              'Check your dog\'s profile',
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            count++;
+                            setState(() {
+                              iconKeeper[1] = 1;
+                            });
+                            Navigator.pushNamed(context, UserProfile.id);
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              iconKeeper[1] == 0
+                                  ? Icons.radio_button_unchecked
+                                  : Icons.check_circle_outline_outlined,
+                              size: 25,
+                              color: iconKeeper[1] == 0
+                                  ? Colors.red
+                                  : Colors.green,
+                            ),
+                            title: Text(
+                              'Check your personal details',
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            count++;
+                            setState(() {
+                              iconKeeper[2] = 1;
+                            });
+                            Navigator.pushNamed(context, FetchLocation.id,
+                                arguments: {'doc_id': arguments['doc_id']});
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              iconKeeper[2] == 0
+                                  ? Icons.radio_button_unchecked
+                                  : Icons.check_circle_outline_outlined,
+                              size: 25,
+                              color: iconKeeper[2] == 0
+                                  ? Colors.red
+                                  : Colors.green,
+                            ),
+                            title: Text(
+                              'Allow us to get your location',
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  RoundedButton(
+                    buttonText: 'Done',
+                    onPressed: () {
+                      if (count < 3) {
+                        showDialog<void>(
+                          context: context,
+                          barrierDismissible: false, // user must tap button!
+                          builder: (BuildContext context) {
+                            return AlertBox(
+                              titleText: 'Tick all the tasks!',
+                              bodyText: '',
+                            );
+                          },
+                        );
+                      } else {
+                        showDialog<void>(
+                          context: context,
+                          barrierDismissible: false, // user must tap button!
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text(
+                                  'The required details have been recorded.'),
+                              content: SingleChildScrollView(
+                                child: ListBody(
+                                  children: <Widget>[
+                                    Text(
+                                        'We shall inform you as soon as we get an update!'),
+                                  ],
                                 ),
-                                onPressed: () {
-                                  Navigator.pushNamed(context, HomeScreen.id);
-                                },
                               ),
-                            ],
-                          );
-                        },
-                      );
-                      // ;
-                    }
-                  },
-                )
-              ],
-            )
-          ],
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text(
+                                    'Ok',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: mainColor,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, HomeScreen.id);
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        // ;
+                      }
+                    },
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

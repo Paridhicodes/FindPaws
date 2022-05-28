@@ -59,158 +59,161 @@ class _FinderDetailsState extends State<FinderDetails> {
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              AppBarInit(),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text(
-                    "Contact details",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
+          child: SafeArea(
+            child: Column(
+              children: [
+                AppBarInit(),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      "Contact details",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextField(
-                      keyboardType: TextInputType.name,
-                      textAlign: TextAlign.left,
-                      onChanged: (value) {
-                        //Do something with the user input.
-                        name = value;
-                      },
-                      decoration:
-                          kTextFieldDecoration.copyWith(hintText: 'Name'),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-                child: Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextField(
-                          keyboardType: TextInputType.emailAddress,
-                          textAlign: TextAlign.left,
-                          onChanged: (value) {
-                            //Do something with the user input.
-                            email = value;
-                          },
-                          decoration: kTextFieldDecoration.copyWith(
-                              hintText: 'Email Address'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-                child: Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            CountryCodePicker(
-                              onChanged: (value) {
-                                countryCode = value;
-                              },
-                              // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                              initialSelection: 'IN',
-                              favorite: ['+91', 'IN'],
-                              // optional. Shows only country name and flag
-                              showCountryOnly: false,
-                              // optional. Shows only country name and flag when popup is closed.
-                              showOnlyCountryWhenClosed: false,
-                              // optional. aligns the flag and the Text left
-                              alignLeft: false,
-                            ),
-                            Expanded(
-                              child: TextField(
-                                keyboardType: TextInputType.phone,
-                                textAlign: TextAlign.left,
-                                onChanged: (value) {
-                                  //Do something with the user input.
-                                  phoneNumber = "$countryCode$value";
-                                },
-                                decoration: kTextFieldDecoration.copyWith(
-                                    hintText: 'Phone Number'),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 60),
-                child: RoundedButton(
-                  buttonText: 'Find',
-                  onPressed: () async {
-                    bool emailValid = RegExp(
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                        .hasMatch(email);
-                    if (!emailValid) {
-                      showDialog<void>(
-                        context: context,
-                        barrierDismissible: false, // user must tap button!
-                        builder: (BuildContext context) {
-                          return AlertBox(
-                            titleText: 'Please enter a valid email address.',
-                            bodyText:
-                                'This will help us to reach the owners asap. ',
-                          );
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextField(
+                        keyboardType: TextInputType.name,
+                        textAlign: TextAlign.left,
+                        onChanged: (value) {
+                          //Do something with the user input.
+                          name = value;
                         },
-                      );
-                    } else {
-                      fetchRecords(arguments['lat'], arguments['long'],
-                          arguments['list']);
-                      if (!updated) {
+                        decoration:
+                            kTextFieldDecoration.copyWith(hintText: 'Name'),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                  child: Column(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextField(
+                            keyboardType: TextInputType.emailAddress,
+                            textAlign: TextAlign.left,
+                            onChanged: (value) {
+                              //Do something with the user input.
+                              email = value;
+                            },
+                            decoration: kTextFieldDecoration.copyWith(
+                                hintText: 'Email Address'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                  child: Column(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              CountryCodePicker(
+                                onChanged: (value) {
+                                  countryCode = value;
+                                },
+                                // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                                initialSelection: 'IN',
+                                favorite: ['+91', 'IN'],
+                                // optional. Shows only country name and flag
+                                showCountryOnly: false,
+                                // optional. Shows only country name and flag when popup is closed.
+                                showOnlyCountryWhenClosed: false,
+                                // optional. aligns the flag and the Text left
+                                alignLeft: false,
+                              ),
+                              Expanded(
+                                child: TextField(
+                                  keyboardType: TextInputType.phone,
+                                  textAlign: TextAlign.left,
+                                  onChanged: (value) {
+                                    //Do something with the user input.
+                                    phoneNumber = "$countryCode$value";
+                                  },
+                                  decoration: kTextFieldDecoration.copyWith(
+                                      hintText: 'Phone Number'),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 60),
+                  child: RoundedButton(
+                    buttonText: 'Find',
+                    onPressed: () async {
+                      bool emailValid = RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(email);
+                      if (!emailValid) {
                         showDialog<void>(
                           context: context,
                           barrierDismissible: false, // user must tap button!
                           builder: (BuildContext context) {
                             return AlertBox(
-                              titleText: 'Fetching potential owner details...',
+                              titleText: 'Please enter a valid email address.',
                               bodyText:
-                                  'Please wait while we search for the possible owners near you.',
+                                  'This will help us to reach the owners asap. ',
                             );
                           },
                         );
+                      } else {
+                        fetchRecords(arguments['lat'], arguments['long'],
+                            arguments['list']);
+                        if (!updated) {
+                          showDialog<void>(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return AlertBox(
+                                titleText:
+                                    'Fetching potential owner details...',
+                                bodyText:
+                                    'Please wait while we search for the possible owners near you.',
+                              );
+                            },
+                          );
+                        }
+                        if (updated) {
+                          Navigator.pushNamed(context, FoundOwners.id,
+                              arguments: {
+                                'lat': arguments['lat'],
+                                'long': arguments['long'],
+                                'url': arguments['url'],
+                                'list': arguments['list'],
+                                'finder_name': name,
+                                'finder_email': email,
+                                'finder_phone': phoneNumber,
+                                'owner_list': owners,
+                              });
+                        }
                       }
-                      if (updated) {
-                        Navigator.pushNamed(context, FoundOwners.id,
-                            arguments: {
-                              'lat': arguments['lat'],
-                              'long': arguments['long'],
-                              'url': arguments['url'],
-                              'list': arguments['list'],
-                              'finder_name': name,
-                              'finder_email': email,
-                              'finder_phone': phoneNumber,
-                              'owner_list': owners,
-                            });
-                      }
-                    }
-                  },
-                ),
-              )
-            ],
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
