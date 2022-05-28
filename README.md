@@ -73,14 +73,174 @@ The flutter application is compatible to run on android smart phones.
 ## Flow of the App
 
 ## Tour through the App
+- <h3> Initial Screens: Login and Sign up</h3>
+<p align="left">
+   <figure style="padding-right: 20px;" >
+  <kbd><img src="images/readmeImg/screenimgs/splashscreen.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Splash Screen</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <figure>
+  <kbd><img src="images/readmeImg/screenimgs/welcomescreen.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Welcome Screen</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <figure>
+  <kbd><img src="images/readmeImg/screenimgs/register.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Join Us Screen</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <figure>
+  <kbd><img src="images/readmeImg/screenimgs/login.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Login In Screen</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+<hr>
+    
+- <h3> Adding pet dogs to the app</h3>
+<p align="left">
+   <figure style="padding-right: 20px;" >
+  <kbd><img src="images/readmeImg/screenimgs/addpet.jpeg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Upload Image of the dog</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <figure>
+  <kbd><img src="images/readmeImg/screenimgs/ownerupload.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Image uploaded </p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <figure>
+  <kbd><img src="images/readmeImg/screenimgs/q1.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> List of determined breeds </p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <figure>
+  <kbd><img src="images/readmeImg/screenimgs/q2.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Enter the name</p></figcaption></div>
+     </figure>
+ </p>    
+      <figure>
+  <kbd><img src="images/readmeImg/screenimgs/q3.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Select the gender </p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <figure>
+  <kbd><img src="images/readmeImg/screenimgs/q4.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Select the age </p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <figure>
+  <kbd><img src="images/readmeImg/screenimgs/q5.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Status of safety </p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+<hr>
+           
+- <h3> Home Screen features</h3>
+<p align="left">
+   <figure style="padding-right: 20px;" >
+  <kbd><img src="images/readmeImg/screenimgs/home2.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Home Screen of the app</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <figure>
+  <kbd><img src="images/readmeImg/screenimgs/useredit.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> User profile edit </p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <figure>
+  <kbd><img src="images/readmeImg/screenimgs/quick.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px">Quick options</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <figure>
+  <kbd><img src="images/readmeImg/screenimgs/nearme.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Lost pets near me</p></figcaption></div>
+     </figure>
+ </p> 
+  <figure>
+  <kbd><img src="images/readmeImg/screenimgs/about.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> About findPAWS</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <figure>
+  <kbd><img src="images/readmeImg/screenimgs/mypets.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px">My dog family</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <figure>
+  <kbd><img src="images/readmeImg/screenimgs/invite.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px">Code for invite </p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<hr>
+
+- <h3> Marking the pet dog as lost </h3>
+<p align="left">
+   <figure style="padding-right: 20px;" >
+  <kbd><img src="images/readmeImg/screenimgs/lost.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Initial Message</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <figure>
+  <kbd><img src="images/readmeImg/screenimgs/ownercheck.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Owner check list</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <figure>
+  <kbd><img src="images/readmeImg/screenimgs/locfetch.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px">Fetching user location</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <figure>
+  <kbd><img src="images/readmeImg/screenimgs/recorded.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Confirmation</p></figcaption></div>
+     </figure>
+ </p>
+    
+<hr>
+  
+- <h3> Found pet functionality</h3>
+<p align="left">
+   <figure style="padding-right: 20px;" >
+  <kbd><img src="images/readmeImg/screenimgs/finder.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px">Upload image of found dog</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <figure>
+  <kbd><img src="images/readmeImg/screenimgs/finderupload.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Determining breed</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <figure>
+  <kbd><img src="images/readmeImg/screenimgs/findercheck.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px">Finder check list</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <figure>
+  <kbd><img src="images/readmeImg/screenimgs/finderloc.jpeg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px">Fetching finder location</p></figcaption></div>
+     </figure>
+ </p> 
+  <figure>
+  <kbd><img src="images/readmeImg/screenimgs/finderdetails.jpeg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> Collecting finder details</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <figure>
+  <kbd><img src="images/readmeImg/screenimgs/fetchingalert.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px">Fetching probable owners</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <figure>
+  <kbd><img src="images/readmeImg/screenimgs/mailsent.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px">Sending mail</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <figure>
+    <kbd><img src="images/readmeImg/screenimgs/mail.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px">Recieved mail</p></figcaption></div>
+     </figure></kbd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </p>   
+ <br>
+    
+If no possible pet parent is found,
+      
+   <figure style="padding-right: 20px;" >
+  <kbd><img src="images/readmeImg/screenimgs/noowners.jpg" height='300' width='150'/>
+   <div><figcaption> <p align="center" style="font-size:100px"> If no owners found</p></figcaption></div>
+     </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+      
+  
+     
+<hr>
+    
 
 ## Implementation of Agile Methodology
 
 ### What is Agile?
 Agile is a development methodology adopted today in the software industry. Agile promotes teamwork, flexible procedures, and sle-organizing teams.
 
-### How I Incorporated Agile Methodology During The Development Cycle?
+### How I incorporated Agile Methodology during The development cycle?
 SCRUM is a subset of Agile, a framework for developing software.The basic time working unit is the sprint. SCRUM teams always reason in sprints and their planning is limited to sprints.
 
 - Sprint 1: **Research and Design** : Researching about ways to accomplish face recognition and dogs. Finding ways to query documents from firebase based on location. Exploring more about firestore and firebase storage. Designing the app theme and layout and wireframing the overall appearance, Planning out how the different functionalities would be embedded on different screens and the order in which they would be implemented.
@@ -122,7 +282,7 @@ Once the build is complete, run the ```run``` command to start the app:
 flutter run
 ```
 
-## Special instructions to work with the app
+## Special Instructions to Work with the App
 
 
 1. The application can only be run on android physical devices. Due to the app being heavy, it would not work on virtual emulators.
