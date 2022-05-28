@@ -63,7 +63,7 @@ class _UploadImageState extends State<UploadImage> {
                                 padding: EdgeInsets.all(8.0),
                                 child: ListTile(
                                   title: Text(
-                                    "Add a cute photo of your pet!",
+                                    "Add a cute photo of your dog!",
                                     style: TextStyle(
                                       fontSize: 30,
                                       fontWeight: FontWeight.w700,
