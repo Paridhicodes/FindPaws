@@ -1,12 +1,28 @@
 # <center><p align="center"> findPAWS Engage 2022 <img src='images/readmeImg/findPaws_logo.png' width="40" height="40"> </p></center>
 
 
-<details open>
- <summary>Table of Contents</summary>
-<ol>
+## Table of Contents
 
- </ol>
-</details>
+1. [About the project](#about-the-project)
+   - [Salient features](#salient-features)
+2. [Technology Stack](#technology-stack)
+3. [Compatibility](#compatibility)
+4. [Tour through the App](#tour-through-the-app)
+   - [Initial Screens: Login and Sign up](#-initial-screens-login-and-sign-up)
+   - [Adding pet dogs to the app](#-adding-pet-dogs-to-the-app)
+   - [Home Screen features](#-home-screen-features)
+   - [Marking the pet dog as lost](#-marking-the-pet-dog-as-lost-)
+   - [Found pet functionality](#-found-pet-functionality)
+5. [Flow of the app](#flow-of-the-app)
+6. [Implementation of Agile Methodology](#implementation-of-agile-methodology)
+7. [Installation](#installation)
+8. [Special Instructions to Work with the App](#special-instructions-to-work-with-the-app)
+9. [Challenges Faced](#challenges-faced)
+10. [Future Scope](#future-scope)
+11. [Support and Contact](#future-scope)
+
+
+
 
 ## About the project
 
@@ -16,6 +32,7 @@
 
 - The app uses both, Face Recognition technology and Realtime Location to give the most accurate result.
 
+[(Back to the top)](#-findpaws-engage-2022--)
 
 ### Salient Features
 
@@ -43,6 +60,8 @@
 - The app can detect whether the uploaded image resembles a cat and displays a separate alert box saying that the user has uploaded the image of a cat and he/she needs to upload the image of a dog
 - Several checks, necessary alerts and loading screens have been implemented to give a better user experience and prevent inconsistency of data in the database.
 
+[(Back to the top)](#-findpaws-engage-2022--)
+
 ## Technology Stack
 
 <p align="center">
@@ -67,11 +86,15 @@
 - GeoFlutterFire has been used to query records within 50km radius.
 - The email service has been implemented using EmailJS. 
 
+[(Back to the top)](#-findpaws-engage-2022--)
+
+
 ## Compatibility
 
 The flutter application is compatible to run on android smart phones.
 
-## Flow of the App
+[(Back to the top)](#-findpaws-engage-2022--)
+
 
 ## Tour through the App
 - <h3> Initial Screens: Login and Sign up</h3>
@@ -229,13 +252,18 @@ If no possible pet parent is found,
    <div><figcaption> <p align="center" style="font-size:100px"> If no owners found</p></figcaption></div>
      </figure>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-
-      
-  
      
 <hr>
     
+[(Back to the top)](#-findpaws-engage-2022--)
+    
+    
+## Flow of the App
+<p align="center"><img src='images/readmeImg/flowchart.png' width="800" height="370"></p>
 
+[(Back to the top)](#-findpaws-engage-2022--)
+    
+    
 ## Implementation of Agile Methodology
 
 ### What is Agile?
@@ -250,10 +278,16 @@ SCRUM is a subset of Agile, a framework for developing software.The basic time w
 
 - Sprint 3: **Testing and debugging** : Tested the app and fixed all the bugs. Tested it from user point of view and implemented minor additional features that could improve the experience. This also included the implementation of alert boxes, loading screens and snackbars.
 
+
+    
+    
 ### How it helped me?
 
 - It made the app development process more efficient and predictable.
 - I worked on functionalities looking at them as smaller units of the larger app due to which the process was easy to handle, flexible and allowed more room to adjust new functionalities.
+
+[(Back to the top)](#-findpaws-engage-2022--)
+    
 
 ## Installation
 
@@ -283,6 +317,8 @@ Once the build is complete, run the ```run``` command to start the app:
 flutter run
 ```
 
+[(Back to the top)](#-findpaws-engage-2022--)
+    
 ## Special Instructions to Work with the App
 
 
@@ -294,6 +330,8 @@ flutter run
 
 4. Certain breeds of dogs possess prominent features of cats. Hence, from certain angles the model predicts the animal to be cat. In such cases, try changing the angle of the camera and the distance from which the image is clicked.
 
+[(Back to the top)](#-findpaws-engage-2022--)
+
 ## Challenges Faced
 1. The major challenge was recognizing and matching the faces of dogs. Though, there are a lot a APIs that support human face recognition, none of theme clearly mentions about face recognition and face matching in animals.
    - *Therefore, I decided to implement tflite models inorder to predict the breeds of the dogs, since, dogs of same breed look almost same. Then, I decided to incorporate the feature of fetching locations of both finders and owners to give a more accurate results. Moreover, when the probable owners of the pets are displayed to the finders, the age, image and other information of the lost dogs is also displayed. So, the finder being the eye witness can contact only those owners whose lost dogs resemble the the found dog the most based on the additional information.*
@@ -301,12 +339,20 @@ flutter run
 2. Another challenge was to fetch the records having information of all the dogs that have been marked missng within a 50km radius. Doing manual calculations on latitude and longitude would compromise with the efficiency and performance of the app.
    - *After a lot of research, I came across GeoFlutterFire, an open-source library that allows you to store and query a set of keys based on their geographic location. It uses geopoints and geohash to selectively load only the data near certain locations, keeping your applications light and responsive, even with extremely large datasets.*
 
+[(Back to the top)](#-findpaws-engage-2022--)
+    
 ## Future Scope
 - The models could be trained on larger data sets supporting more number of breeds of dogs.
 - A discussion forum can be established for pet parents where they can discuss about common pet issues.
 - If billing is enabled, then the last known location of dog can be fetched by searching through the map in realtime. Presently, it is assumed that the dog is lost near the current location of the parent.
 - I have already included a section to generate a unique invite code in the app. An invite and earn feature can also be implemented combined with the unique code generation feature.
 
+[(Back to the top)](#-findpaws-engage-2022--)
+    
 ## Support and Contact
 
 Email to: paridhijain0201@gmail.com
+    
+    
+[(Back to the top)](#-findpaws-engage-2022--)
+    
