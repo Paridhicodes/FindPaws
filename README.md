@@ -64,6 +64,7 @@
 - The backend has been implemented using Firebase. (Firebase authentication, Firestore and Firebase Storage have been used.)
 - The models for Face Recognition have been implemented using tflite.
 - The locations have been fetched using Google Maps API.
+- GeoFlutterFire has been used to query records within 50km radius.
 - The email service has been implemented using EmailJS. 
 
 ## Compatibility
