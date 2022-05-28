@@ -160,6 +160,9 @@ class _MyDogsScreenState extends State<MyDogsScreen> {
                                                                   ),
                                                                   onPressed:
                                                                       () async {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
                                                                     setState(
                                                                         () {
                                                                       spinner =
@@ -183,9 +186,7 @@ class _MyDogsScreenState extends State<MyDogsScreen> {
                                                                       spinner =
                                                                           false;
                                                                     });
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pop();
+
                                                                     setState(
                                                                         () {
                                                                       spinner =
