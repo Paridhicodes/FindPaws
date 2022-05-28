@@ -62,7 +62,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     height: 20,
                   ),
                   AppButton(
-                    buttonText: "I've found a lost pet",
+                    buttonText: "I've found a lost dog",
                     onPressed: () {
                       Navigator.pushNamed(context, FinderUpload.id);
                     },
