@@ -72,6 +72,9 @@ The flutter application is compatible to run on android smart phones.
 
 ## Flow of the App
 
+## Tour through the App
+
+
 ## Implementation of Agile Methodology
 
 ### What is Agile?
@@ -90,12 +93,6 @@ SCRUM is a subset of Agile, a framework for developing software.The basic time w
 
 - It made the app development process more efficient and predictable.
 - I worked on functionalities looking at them as smaller units of the larger app due to which the process was easy to handle, flexible and allowed more room to adjust new functionalities.
-
-
-
-
-
-## Tour through the App
 
 ## Installation
 
