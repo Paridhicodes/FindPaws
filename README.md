@@ -51,13 +51,13 @@
 #### Specific to the finders
 - The finders can directly click image from their phones on the spot to check the breed of the found dog.
 - The current location of the finder is taken and the application displays the list of all the pet parents within 50km radius of the same breed. The finder can then contact the probable owners in a single click by sharing his details with the owners.
-- The Email sent to the pet parent consists the contact details of the contact details of the finder along with a url of the found dog.
+- The Email sent to the pet parent consists of the contact details of the finder along with a url of image of the found dog.
 
 #### Key points:
 - The application uses two tflite models.
 - The first tflite model is trained to identify 120 breeds of dogs.
 - Another tflite model verifies that the image does not show a cat, since certain breeds of cats and dogs look similar when clicked from certain angles.
-- The app can detect whether the uploaded image resembles a cat and displays a separate alert box saying that the user has uploaded the image of a cat and he/she needs to upload the image of a dog
+- The app can detect whether the uploaded image resembles a cat and displays a separate alert box saying that the user has uploaded the image of a cat and he/she needs to upload the image of a dog.
 - Several checks, necessary alerts and loading screens have been implemented to give a better user experience and prevent inconsistency of data in the database.
 
 [(Back to the top)](#-findpaws-engage-2022--)
@@ -79,11 +79,11 @@
 <br>
 
 - Flutter and Dart were used to develop the application.
-- Necessary packages were imported from pub.dev
-- The backend has been implemented using Firebase. (Firebase authentication, Firestore and Firebase Storage have been used.)
+- Necessary packages were imported from pub.dev.
+- The backend has been implemented using Firebase. (Firebase authentication, Firestore and Firebase Storage have been used).
 - The models for Face Recognition have been implemented using tflite.
 - The locations have been fetched using Google Maps API.
-- GeoFlutterFire has been used to query records within 50km radius.
+- GeoFlutterFire has been used to query records within a 50km radius of the current location.
 - The email service has been implemented using EmailJS. 
 
 [(Back to the top)](#-findpaws-engage-2022--)
@@ -269,12 +269,12 @@ If no possible pet parent is found,
 ### What is Agile?
 Agile is a development methodology adopted today in the software industry. Agile promotes teamwork, flexible procedures, and sle-organizing teams.
 
-### How I incorporated Agile Methodology during The development cycle?
+### How I incorporated Agile Methodology during the development cycle?
 SCRUM is a subset of Agile, a framework for developing software.The basic time working unit is the sprint. SCRUM teams always reason in sprints and their planning is limited to sprints.
 
 - Sprint 1: **Research and Design** : Researching about ways to accomplish face recognition and dogs. Finding ways to query documents from firebase based on location. Exploring more about firestore and firebase storage. Designing the app theme and layout and wireframing the overall appearance, Planning out how the different functionalities would be embedded on different screens and the order in which they would be implemented.
 
-- Sprint 2: **Building the application** : Divided the app into two interfaces: owner and finder. Built and coded the core of the application including all the functionalities separately for both the interfaces.Ensured data consistency in the database. Encountered bugs which I either fixed by reading through stack ovrflow and documentations or found alternative implementations for the same. The UI was taken care of throughout the process so that the user experience is not compromised during the implementation of the functionalities. Later, when both the interfaces were complete the navigation routes were set up so as to link the interfaces properly.
+- Sprint 2: **Building the application** : Divided the app into two interfaces: owner and finder. Built and coded the core of the application including all the functionalities separately for both the interfaces.Ensured data consistency in the database. Encountered bugs which were either fixed by reading through stack overflow and documentations or alternative implementations were found for the same. The UI was taken care of throughout the process so that the user experience is not compromised during the implementation of the functionalities. Later, when both the interfaces were complete the navigation routes were set up so as to link the interfaces properly.
 
 - Sprint 3: **Testing and debugging** : Tested the app and fixed all the bugs. Tested it from user point of view and implemented minor additional features that could improve the experience. This also included the implementation of alert boxes, loading screens and snackbars.
 
@@ -333,8 +333,8 @@ flutter run
 [(Back to the top)](#-findpaws-engage-2022--)
 
 ## Challenges Faced
-1. The major challenge was recognizing and matching the faces of dogs. Though, there are a lot a APIs that support human face recognition, none of theme clearly mentions about face recognition and face matching in animals.
-   - *Therefore, I decided to implement tflite models inorder to predict the breeds of the dogs, since, dogs of same breed look almost same. Then, I decided to incorporate the feature of fetching locations of both finders and owners to give a more accurate results. Moreover, when the probable owners of the pets are displayed to the finders, the age, image and other information of the lost dogs is also displayed. So, the finder being the eye witness can contact only those owners whose lost dogs resemble the the found dog the most based on the additional information.*
+1. The major challenge was recognizing and matching the faces of dogs. Though, there are a lot a APIs that support human face recognition, none of them clearly mentions about face recognition and face matching in animals.
+   - *Therefore, I decided to implement tflite models inorder to predict the breeds of the dogs, since, dogs of same breed look almost same. Then, I decided to incorporate the feature of fetching locations of both finders and owners to give more accurate results. Moreover, when the probable owners of the pets are displayed to the finders, the age, image and other information of the lost dogs is also displayed. So, the finder being the eye witness may contact only those owners whose lost dogs resemble the found dog the most based on the additional information.*
 
 2. Another challenge was to fetch the records having information of all the dogs that have been marked missng within a 50km radius. Doing manual calculations on latitude and longitude would compromise with the efficiency and performance of the app.
    - *After a lot of research, I came across GeoFlutterFire, an open-source library that allows you to store and query a set of keys based on their geographic location. It uses geopoints and geohash to selectively load only the data near certain locations, keeping your applications light and responsive, even with extremely large datasets.*
