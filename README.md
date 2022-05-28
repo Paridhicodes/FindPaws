@@ -10,7 +10,7 @@
 
 ## About the project
 
-- The project findPAWS is an ***Android Mobile Application built using Flutter*** for Microsoft Enagage 2022 by implementing the Agile Methodology.
+- The project findPAWS is an ***Android Mobile Application built using Flutter*** for Microsoft Engage 2022 by implementing the Agile Methodology.
 
 - The purpose of the app is to locate the potential dog owners of the lost dogs through email enclosing the contact details of the finder.
 
@@ -22,11 +22,11 @@
 
  #### Specific to the dog owners
 - Login and Register features implemented through Firebase authentication.
-- The breeds of the dogs is identified by the tflite model and the owner can choose among them, and also specify any other breed incase, the breed is not present in the list.
-- The app securely allows to proceed only if it detects the image of a dog. In case of any misupload, it prompts the user to try again. In case, the image is of a cat, the cat is detected and the user is asked to upload the image of a dog.
+- The breeds of the dogs is identified by the tflite model and the owner can choose among them, and also specify any other breed in case, the breed is not present in the list.
+- The app securely allows to proceed only if it detects the image of a dog. In case of any wrong upload, it prompts the user to try again. In case, the image is of a cat, the cat is detected and the user is asked to upload the image of a dog.
 - The pet parents can add new pet dogs, delete pets and also edit information about their current pet.
 - The app also displays the pets that are missing within the 50km radius of the user.
-- The pet owners need to provide their current location incase to register their dog as lost.
+- The pet owners need to provide their current location in case to register their dog as lost.
 
 > (*Note: I have assumed that the pet is lost near the current location of the owner. I could not implement the functionality that could allow to the owners to provide an exact location on the Google Maps other than the current location, because this is a paid feature of Google Cloud APIs and requires billing.*)
 
@@ -80,7 +80,7 @@ Agile is a development methodology adopted today in the software industry. Agile
 ### How I Incorporated Agile Methodology During The Development Cycle?
 SCRUM is a subset of Agile, a framework for developing software.The basic time working unit is the sprint. SCRUM teams always reason in sprints and their planning is limited to sprints.
 
-- Sprint 1: **Researh and Design** : Reaseraching about ways to accomplish face recognition and dogs. Finding ways to query documents from firebase based on location. Exploring more about firestore and firebase storage. Designing the app theme and layout and wireframing the overall appearance, Planning out how the different functionalities would be embedded on different screens and the order in which they would be implemented.
+- Sprint 1: **Research and Design** : Researching about ways to accomplish face recognition and dogs. Finding ways to query documents from firebase based on location. Exploring more about firestore and firebase storage. Designing the app theme and layout and wireframing the overall appearance, Planning out how the different functionalities would be embedded on different screens and the order in which they would be implemented.
 
 - Sprint 2: **Building the application** : Divided the app into two interfaces: owner and finder. Built and coded the core of the application including all the functionalities separately for both the interfaces.Ensured data consistency in the database. Encountered bugs which I either fixed by reading through stack ovrflow and documentations or found alternative implementations for the same. The UI was taken care of throughout the process so that the user experience is not compromised during the implementation of the functionalities. Later, when both the interfaces were complete the navigation routes were set up so as to link the interfaces properly.
 
@@ -88,7 +88,7 @@ SCRUM is a subset of Agile, a framework for developing software.The basic time w
 
 ### How it helped me?
 
-- It made the app development process more efficient and predicatable.
+- It made the app development process more efficient and predictable.
 - I worked on functionalities looking at them as smaller units of the larger app due to which the process was easy to handle, flexible and allowed more room to adjust new functionalities.
 
 
@@ -132,7 +132,7 @@ flutter run
 
 2. Depending on the kind of predictions made by the models, different alerts are prompted. The app allows to proceed when it is confirmed that it is the image of a dog that belongs to a certain breed after careful examination.
 
-3. Incase the app prompts to upload a clear image of a dog, please ensure proper lighting in the image.
+3. In case the app prompts to upload a clear image of a dog, please ensure proper lighting in the image.
 
 4. Certain breeds of dogs possess prominent features of cats. Hence, from certain angles the model predicts the animal to be cat. In such cases, try changing the angle of the camera and the distance from which the image is clicked.
 
