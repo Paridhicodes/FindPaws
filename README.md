@@ -1,5 +1,7 @@
-# <center><p align="center"> findPAWS Engage 2022 <img src='images/readmeImg/findPaws_logo.png' width="40" height="40"> </p></center>
+# <center><h1 align="center"> findPAWS Engage 2022 <img src='images/readmeImg/findPaws_logo.png' width="40" height="40"> </h1></center>
+### <center><p align="center"><i>A face recognition app to locate the potential dog owners of the lost dogs.</i></p></center>
 
+<br> 
 
 ## Table of Contents
 
@@ -303,6 +305,14 @@ git clone https://github.com/Paridhicodes/FindPaws.git
 ```
 <br>
 
+Change the directory.
+```
+cd FindPaws/
+```
+      
+<br>
+      
+      
 Run the ```packages get``` command in your project directory:
 
 ```
